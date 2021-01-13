@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.1.0
+
       - name: Set up Python 3.8
       - uses: actions/setup-python@v2
         with:
@@ -21,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           python minify.py
-    
+
       - name: Print changelog
         run: echo "test2"
 
