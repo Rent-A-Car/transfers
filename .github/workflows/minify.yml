@@ -9,20 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # in this example, there is a newer version already installed, 3.7.7, so the older version will be downloaded
+        python-version: ['3.8']
     steps:
-      - uses: actions/checkout@v2.1.0
-
-      - name: Set up Python 3.8
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
-      - name: Run python
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          python minify.py
-
-      - name: Print changelog
-        run: echo "test2"
-
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - run:|
+        pip install -r requirements.txt
+        python minify.py
