@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
       - run: |
-          pip install -r requirements.txt 
-          python minify.py
+          pip3 install -r requirements.txt 
+          python3 minify.py
       
       - name: Print changelog
         run: echo "test2"
