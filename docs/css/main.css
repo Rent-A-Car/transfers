@@ -1,9 +1,7 @@
 /*!
   SIDEBAR
  */
-body{
-  overflow: hidden;
-}
+
 #sidenav {
   height: 100%;
   width: 0;
@@ -18,7 +16,6 @@ body{
 
 #main-page,#navPages{
    transition: 225ms;
-   min-width: 100vw;
 }
 
 #SidebarOpasity{
@@ -33,7 +30,6 @@ overflow-y: auto;
 overflow-x: hidden;
 text-align: center;
 
-transition: opacity 225ms;
 transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 

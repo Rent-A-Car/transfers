@@ -1,8 +1,8 @@
 function openSidebarNav() {
 d=document;
-  d.getElementById("sidenav").style.width = "51%";
-  d.getElementById("main-page").style.marginLeft = "51%";
-  d.getElementById("navPages").style.marginLeft = "51%";
+  d.getElementById("sidenav").style.width = "15rem";
+  d.getElementById("main-page").style.marginLeft = "15rem";
+  d.getElementById("navPages").style.marginLeft = "15rem";
   d.getElementById("SidebarOpasity").style.width = "100%";
   d.getElementById("SidebarOpasity").style.opacity = "0.6";  
 
