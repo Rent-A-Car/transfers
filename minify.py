@@ -6,6 +6,15 @@ jsFiles = list(Path('data').glob('**/*.js'))
 cssFiles = list(Path('data').glob('**/*.css'))
 allFiles = list(Path('data').glob('**/*'))
 
+print("------html-----")
+print(htmlFiles)
+print("------js-----")
+print(jsFiles)
+print("------css-----")
+print(cssFiles)
+print("------all-----")
+print(allFiles)
+print("--------------")
 
 os.system('rm -fr docs/*')
 
