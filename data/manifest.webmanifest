@@ -15,10 +15,10 @@
     }
   ],
   "start_url": "/?source=pwa",
-  "background_color": "#3367D6",
+  "background_color": "#50a7a0",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#3367D6",
+  "theme_color": "#50a7a0",
   "shortcuts": [
     {
       "name": "How's weather today?",
