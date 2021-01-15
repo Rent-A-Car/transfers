@@ -11,7 +11,7 @@ if ('serviceWorker' in navigator) {
 /*
  sw end
 */
-new Hammer(document.getElementById("sidenav")).get('swipe').set({ direction: Hammer.DIRECTION_LEFT}).manager.on("swipe",closeSidebarNav)
+new Hammer(document.getElementById("sidenav")).get('swipe').set({direction:Hammer.DIRECTION_LEFT}).manager.on("swipe",closeSidebarNav)
 function openSidebarNav() {
 d=document;
   d.getElementById("sidenav").style.width = "80%";
@@ -31,3 +31,7 @@ d=document;
   d.getElementById("SidebarOpasity").style.width = "0px";
   
 }
+
+
+
+new Hammer(document.getElementById("navPages")).get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL}).manager.on("swipe",(e)=>{(e.direction == 2)?document.getElementById("page-container").append("left"):document.getElementById("page-container").append("right")})
