@@ -9,15 +9,15 @@ const CacheAssets = [
 ];
 
 self.addEventListener('install', async event => {
-    const cache = await caches.open(staticCacheName);
-    await cache.addAll(staticAssets);
+    const cache = await caches.open(CACHE);
+    await cache.addAll(CacheAssets);
     console.log('Service worker has been installed');
 });
 
 self.addEventListener('activate', async event => {
     const cachesKeys = await caches.keys();
     const checkKeys = cachesKeys.map(async key => {
-        if (![staticCacheName, dynamicCacheName].includes(key)) {
+        if (![CACHE, CACHE].includes(key)) {
             await caches.delete(key);
         }
     });
@@ -36,7 +36,7 @@ async function checkCache(req) {
 }
 
 async function checkOnline(req) {
-    const cache = await caches.open(dynamicCacheName);
+    const cache = await caches.open(CACHE);
     try {
         const res = await fetch(req);
         await cache.put(req, res.clone());
