@@ -7,7 +7,7 @@ const CacheAssets = [
 './404.html'
 ]
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', (evt) => {
     console.log('Установлен');
   evt.waitUntil(caches.open(CACHE).then(function (cache) {
     cache.addAll(CacheAssets);
