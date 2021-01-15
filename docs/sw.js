@@ -26,7 +26,7 @@ self.addEventListener('activate', async event => {
 });
 
 self.addEventListener('fetch', event => {
-    console.log(`Trying to fetch ${event.request.copy()}`);
+    console.log(`Trying to fetch ${event.request}`);
     event.respondWith(checkCache(event.request));
 });
 
