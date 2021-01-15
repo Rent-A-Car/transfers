@@ -12,6 +12,7 @@ if ('serviceWorker' in navigator) {
  sw end
 */
 new Hammer(document.getElementById("sidenav")).get('swipe').set({direction:Hammer.DIRECTION_LEFT}).manager.on("swipe",closeSidebarNav)
+new Hammer(document.getElementById("navControl")).get('swipe').set({direction:Hammer.DIRECTION_RIGHT}).manager.on("swipe",openSidebarNav)
 function openSidebarNav() {
 d=document;
   d.getElementById("sidenav").style.width = "80%";
