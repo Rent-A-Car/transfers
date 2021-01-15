@@ -1,7 +1,9 @@
 /*!
   SIDEBAR
  */
-
+body{
+  font-family: 'Roboto Slab', serif!important;
+}
 #sidenav {
   height: 100%;
   width: 0;
