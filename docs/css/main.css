@@ -41,16 +41,18 @@ transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
  */
 
 /* PAGE NAV */
-
+#navPages{
+  height: 60px;
+}
 #navPages > div > [nav-id] {
     min-width: 120px;
+    max-height: 124px;
     height: 100%;
     margin: 0;
     border-radius: 0;
     line-height: 25px;
     text-align: center;
     text-align: center;
-    padding: 8px;
     background: transparent;
     border: none!important;
     color: #757575;
