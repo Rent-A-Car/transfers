@@ -40,3 +40,32 @@ transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   SIDEBAR END
  */
 
+/* PAGE NAV */
+
+#navPages > div > [nav-id] {
+    min-width: 120px;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    line-height: 25px;
+    text-align: center;
+    text-align: center;
+    padding: 8px;
+    background: transparent;
+    border: none!important;
+    color: #757575;
+}
+#navPages > div > [nav-id]:focus{
+  outline:0;
+}
+#navPages > div > [nav-id].active {
+color: inherit;
+}
+.bi{
+  font-size: 24px;
+}
+#navPages > div > [nav-id] *{
+  display: block;
+}
+
+/* PAGE NAV END */
