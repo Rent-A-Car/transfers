@@ -1,53 +1,54 @@
-const CACHE_Version = 'v1'
-const CACHE= 'sitecache-'+CACHE_Version
-const CacheAssets = [
-'./index.html',
-'./css/main.css',
-'./js/main.js',
-'./404.html'
-]
+// This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
 
-self.addEventListener('install', (evt) => {
-    console.log('Установлен');
-  evt.waitUntil(caches.open(CACHE).then(function (cache) {
-    cache.addAll(CacheAssets);
-  }));
+const CACHE = "pwabuilder-offline-page";
 
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
+// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
+const offlineFallbackPage = "ToDo-replace-this-name.html";
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
-self.addEventListener('activate', (event) => {
-    console.log('Активирован');
+self.addEventListener('install', async (event) => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then((cache) => cache.add(offlineFallbackPage))
+  );
 });
 
-
-self.addEventListener('fetch', function(evt) {
- console.log('Происходит запрос на сервер');
-  // You can use `respondWith()` to answer immediately, without waiting for the
-  // network response to reach the service worker...
-  evt.respondWith(fromCache(evt.request));
-  // ...and `waitUntil()` to prevent the worker from being killed until the
-  // cache is updated.
-  evt.waitUntil(update(evt.request));
-});
-
-
-// Open the cache where the assets were stored and search for the requested
-// resource. Notice that in case of no matching, the promise still resolves
-// but it does with `undefined` as value.
-function fromCache(request) {
-  return caches.open(CACHE).then(function (cache) {
-    return cache.match(request).then(function (matching) {
-      return matching || Promise.reject('no-match');
-    });
-  });
+if (workbox.navigationPreload.isSupported()) {
+  workbox.navigationPreload.enable();
 }
 
-// Update consists in opening the cache, performing a network request and
-// storing the new response data.
-function update(request) {
-  return caches.open(CACHE).then(function (cache) {
-    return fetch(request).then(function (response) {
-      return cache.put(request, response);
-    });
-  });
-}
+workbox.routing.registerRoute(
+  new RegExp('/*'),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: CACHE
+  })
+);
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const preloadResp = await event.preloadResponse;
+
+        if (preloadResp) {
+          return preloadResp;
+        }
+
+        const networkResp = await fetch(event.request);
+        return networkResp;
+      } catch (error) {
+
+        const cache = await caches.open(CACHE);
+        const cachedResp = await cache.match(offlineFallbackPage);
+        return cachedResp;
+      }
+    })());
+  }
+});
