@@ -1,9 +1,12 @@
 const Static_CACHE_Version = 'v0'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
+	//html
     './',
     './index.html',
+    //css
     './css/main.css',
+    
     './js/main.js',
     './manifest.webmanifest',
     './css/bootstrap-icons.css',
