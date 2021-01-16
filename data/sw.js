@@ -8,7 +8,7 @@ const Static_CACHEAssets = [
     './css/main.css',
     './css/bootstrap-icons.css',
     './css/RobotoSlab.css',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css',
+    './css/bootstrap.min.css',
     //js
     './js/main.js',
     './js/menu.js',

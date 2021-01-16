@@ -67,7 +67,7 @@ for pA in cssFiles:
         os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
         cssdata = {'input': f.encode()}
         with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
-            ff.write(requests.post(jsurl, data=cssdata).text.encode())
+            ff.write(requests.post(cssurl, data=cssdata).text.encode())
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
