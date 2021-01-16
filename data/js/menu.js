@@ -9,12 +9,12 @@ let calibrate = 50;
     el.addEventListener('touchstart', function(e) {
     touchstartX = e.changedTouches[0].screenX;
     touchstartY = e.changedTouches[0].screenY;
-}, false);
+}, {passive: true});
     el.addEventListener('touchend', function(e) {
     touchendX = e.changedTouches[0].screenX;
     touchendY = e.changedTouches[0].screenY;
     handleSwipe(callback);
-}, false); 
+}, {passive: true}); 
 
     function handleSwipe(callback) {
     if (touchendX + calibrate < touchstartX) {
