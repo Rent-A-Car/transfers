@@ -1,4 +1,4 @@
-import htmlmin,os
+import htmlmin,os,requests
 from pathlib import Path
 
 htmlFiles = list(Path('data').glob('**/*.html'))
@@ -39,4 +39,20 @@ for pA in htmlFiles:
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
+
+
+jsurl = 'https://javascript-minifier.com/raw'
+
+for pA in jsFiles:
+    if (os.path.isfile(pA)):
+        with open(pA,'rb') as f:
+            os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
+            jsdata = {'input': f.read()}
+            with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
+                ff.write(requests.post(jsurl, data=jsdata).text.encode())
+    elif(os.path.isdir(pA)):
+        if(os.path.exists(pA)):
+            os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
+
+
 
