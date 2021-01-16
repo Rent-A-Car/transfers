@@ -27,8 +27,8 @@ window.addEventListener('load', () => {
 /*
  sw end
 */
-new Hammer(document.getElementById("sidenav")).get('swipe').set({direction:Hammer.DIRECTION_LEFT}).manager.on("swipe",closeSidebarNav)
-new Hammer(document.getElementById("navControl")).get('swipe').set({direction:Hammer.DIRECTION_RIGHT}).manager.on("swipe",openSidebarNav)
+Swiper(document.getElementById("sidenav"),closeSidebarNav,4)
+Swiper(document.getElementById("navControl"),openSidebarNav,2)
 function openSidebarNav() {
 d=document;
   d.getElementById("sidenav").style.width = "80%";
