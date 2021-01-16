@@ -1,4 +1,4 @@
-import htmlmin,os,requests
+import htmlmin,os,requests,json
 from pathlib import Path
 
 htmlFiles = list(Path('data').glob('**/*.html'))
@@ -15,6 +15,10 @@ print(cssFiles)
 print("------all-----")
 print(allFiles)
 print("--------------")
+
+with open('purgecss.config.js','w') as f:
+    f.write("module.exports = {content: "+str([str(x) for x in jsFiles]+[str(x) for x in htmlFiles])+"}")
+
 
 os.system('rm -fr docs/*')
 
@@ -59,11 +63,11 @@ cssurl = 'https://cssminifier.com/raw'
 
 for pA in cssFiles:
     if (os.path.isfile(pA)):
-        with open(pA,'rb') as f:
-            os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
-            cssdata = {'input': f.read()}
-            with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
-                ff.write(requests.post(jsurl, data=cssdata).text.encode())
+        f = json.loads(os.popen('purgecss -c purgecss.config.js -css '+str(pA)).read())[0]['css']
+        os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
+        cssdata = {'input': f.encode()}
+        with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
+            ff.write(requests.post(jsurl, data=cssdata).text.encode())
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
