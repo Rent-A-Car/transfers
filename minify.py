@@ -55,4 +55,18 @@ for pA in jsFiles:
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
 
 
+cssurl = 'https://cssminifier.com/raw'
+
+for pA in cssFiles:
+    if (os.path.isfile(pA)):
+        with open(pA,'rb') as f:
+            os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
+            cssdata = {'input': f.read()}
+            with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
+                ff.write(requests.post(jsurl, data=cssdata).text.encode())
+    elif(os.path.isdir(pA)):
+        if(os.path.exists(pA)):
+            os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
+
+
 
