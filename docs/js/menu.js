@@ -1,0 +1,1 @@
+const Swiper=(e,n,c)=>{let o=0,s=0,t=0,h=0,d=50;e.addEventListener("touchstart",function(e){o=e.changedTouches[0].screenX,s=e.changedTouches[0].screenY},!1),e.addEventListener("touchend",function(e){t=e.changedTouches[0].screenX,h=e.changedTouches[0].screenY,function(e){t+d<o&&(c?4==c&&e(4):console.log(e(4)));t>o+d&&(c?2==c&&e(2):console.log(e(2)))}(n)},!1)};
