@@ -2,7 +2,7 @@ const Static_CACHE_Version = 'v0'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
-    './',
+    './6',
     './offline.html',
     //css
     './css/main.css',
