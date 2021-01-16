@@ -1,1 +1,1 @@
-module.exports = {content: ['data/sw.js', 'data/js/main.js', 'data/js/menu.js', 'data/404.html', 'data/offline.html', 'data/index.html', 'data/icons/html_code.html']}
+module.exports = {content: ['data/sw.js', 'data/js/main.js', 'data/js/menu.js', 'data/404.html', 'data/index.html', 'data/offline.html', 'data/icons/html_code.html']}
