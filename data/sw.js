@@ -6,7 +6,7 @@ const Static_CACHEAssets = [
     './offline.html',
     //css
     './css/main.css',
-    './css/bootstrap-icons.css',
+    './css/iconsfont.css',
     './css/RobotoSlab.css',
     './css/bootstrap.min.css',
     //js
@@ -18,7 +18,8 @@ const Static_CACHEAssets = [
     './icons/android-chrome-192x192.png',
     
     //fonts
-    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/fonts/bootstrap-icons.woff2',
+    '/css/fonts/iconsfont.woff2',
+    '/css/fonts/iconsfont.woff',
     'https://fonts.gstatic.com/s/robotoslab/v12/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISma2RjRdE.woff2',
     'https://fonts.gstatic.com/s/robotoslab/v12/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISmb2Rj.woff2',
     //other
@@ -69,9 +70,9 @@ self.addEventListener('fetch', event => {
 async function checkCache(req) {
 	if (req.method == "GET"){
 		let url = new URL(req.url)
-		let furl = (url.host in ROUTETable)?(url.pathname in ROUTETable[url.host])?ROUTETable[url.host][url.pathname]:req.url:req.url;
-		console.log(furl)
-		const cachedResponse = await caches.match(furl);
+		
+		
+		const cachedResponse = await caches.match(req);
 		return cachedResponse || checkOnline(req);
 
 	}else{

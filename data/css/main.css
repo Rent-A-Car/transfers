@@ -47,7 +47,7 @@ transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   padding-left: 8px;
   padding-right: 8px;
 }
-#navPages > div > [nav-id] {
+#navPages > [nav-id] {
     max-height: 124px;
     min-width: 99px;
     height: 100%;
@@ -60,16 +60,16 @@ transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     border: none!important;
     color: #757575;
 }
-#navPages > div > [nav-id]:focus{
+#navPages >  [nav-id]:focus{
   outline:0;
 }
-#navPages > div > [nav-id].active {
+#navPages >  [nav-id].active {
 color: inherit;
 }
 .bi{
   font-size: 24px;
 }
-#navPages > div > [nav-id] *{
+#navPages >  [nav-id] *{
   display: block;
 }
 
