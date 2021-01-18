@@ -1,16 +1,16 @@
 @charset "UTF-8";
 
  @font-face {
-  font-family: 'iconsFont';
-  src: url('./fonts/iconsfont.woff2') format('woff2'),
-       url('./fonts/iconsfont.woff') format('woff');
+  font-family: 'iconsfont';
+  src: url('/css/fonts/iconsfont.woff2') format('woff2'),
+       url('/css/fonts/iconsfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
  
  [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "iconsFont";
+  font-family: "iconsfont";
   font-style: normal;
   font-weight: normal;
   speak: never;

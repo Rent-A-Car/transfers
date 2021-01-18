@@ -1,4 +1,4 @@
-const Static_CACHE_Version = 'v0'
+const Static_CACHE_Version = '18-01-21'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
