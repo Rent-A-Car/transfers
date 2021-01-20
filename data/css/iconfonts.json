@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "iconsfont",
   "css_prefix_text": "icon-",
   "css_use_suffix": false,
   "hinting": true,
@@ -9,7 +9,7 @@
     {
       "uid": "7f3d8ff1d5f6ee019f0c00ed7a86caec",
       "css": "truck",
-      "code": 128666,
+      "code": 59398,
       "src": "fontawesome"
     },
     {
@@ -197,13 +197,13 @@
     {
       "uid": "acf41aa4018e58d49525665469e35665",
       "css": "like",
-      "code": 128077,
+      "code": 59407,
       "src": "fontawesome"
     },
     {
       "uid": "7533e68038fc6d520ede7a7ffa0a2f64",
       "css": "dislike",
-      "code": 128078,
+      "code": 59409,
       "src": "fontawesome"
     },
     {
@@ -221,13 +221,13 @@
     {
       "uid": "bc71f4c6e53394d5ba46b063040014f1",
       "css": "reload",
-      "code": 10227,
+      "code": 59410,
       "src": "fontawesome"
     },
     {
       "uid": "85528017f1e6053b2253785c31047f44",
       "css": "comment",
-      "code": 59160,
+      "code": 59411,
       "src": "fontawesome"
     },
     {
@@ -247,7 +247,7 @@
     {
       "uid": "555ef8c86832e686fef85f7af2eb7cde",
       "css": "left",
-      "code": 8592,
+      "code": 59412,
       "src": "fontawesome"
     },
     {
@@ -273,34 +273,26 @@
     {
       "uid": "41087bc74d4b20b55059c60a33bf4008",
       "css": "edit",
-      "code": 9997,
+      "code": 59413,
       "src": "fontawesome"
     },
     {
       "uid": "44e04715aecbca7f266a17d5a7863c68",
       "css": "plus",
-      "code": 43,
+      "code": 59414,
       "src": "fontawesome"
     },
     {
       "uid": "9dd9e835aebe1060ba7190ad2b2ed951",
       "css": "search",
-      "code": 128269,
+      "code": 59415,
       "src": "fontawesome"
     },
     {
-      "uid": "815b99876bb39d8055d719909b2f71b5",
-      "css": "plus-circle",
-      "code": 59398,
-      "src": "custom_icons",
-      "selected": false,
-      "svg": {
-        "path": "M1000 500A500 500 0 1 1 0 500 500 500 0 0 1 1000 500ZM531.3 281.3A31.3 31.3 0 0 0 468.8 281.3V468.8H281.3A31.3 31.3 0 0 0 281.3 531.3H468.8V718.8A31.3 31.3 0 0 0 531.3 718.8V531.3H718.8A31.3 31.3 0 0 0 718.8 468.8H531.3V281.3Z",
-        "width": 1000
-      },
-      "search": [
-        "plus-circle-fill"
-      ]
+      "uid": "f4f0e849b805be1f6d76b65581cb3b8b",
+      "css": "menu",
+      "code": 59416,
+      "src": "fontawesome"
     }
   ]
 }

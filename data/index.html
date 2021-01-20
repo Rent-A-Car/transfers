@@ -41,13 +41,56 @@
 </div>
 
 <div id="main-page">
+
+<!-- Modal -->
+<div class="modal fadeIn" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+
+<div class="mx-auto mt-3">
+<div class="sign-in-title">
+<img class="sign-in-logo" src="/icons/apple-touch-icon-precomposed.png">
+<p class="app-name-header">
+Field Delivery
+</p>
+<div class="title-description">What's the best way to sign in?<br>Use your work email!</div>
+</div>
+
+<div class="signUpWithLargeLabel">
+Sign in with:
+</div>
+<ul class="signProviders">
+<li class="sign-source">
+<button id="google-login-in">
+<span class="Providerlogo">
+<img src="/icons/GoogleLogo.svg" alt="Google" class="h-100 w-100">
+</span>
+<span class="Profiderdescription">
+Google
+</span>
+</button>
+</li>
+
+</ul>
+
+<p id="privacy-notice">
+By signing in, you agree to the <a href="/appinfo/termsofuse?appId=eb30bfd8-1838-47d8-9740-0887b313318d" target="_self" rel="modal:open">terms of service</a> and
+<a href="/appinfo/privacypolicy?appId=eb30bfd8-1838-47d8-9740-0887b313318d" target="_self" rel="modal:open">privacy policy</a>.
+</p>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
 	<!-- TOP NAV -->
 <nav id="navControl" class="navbar navbar-expand navbar-light bg-white border-bottom">
 <div>
 	
-	<div>logo</div>
-	<div>open sidebar</div>
-	<div>pagename</div>
+	<div id="headlogo"></div>
+	<div><button id="menuopenbutton"><i class="icon-menu"></i></button></div>
+	<div id="pageName">Водіи</div>
 
 </div>
 <div></div>
@@ -62,7 +105,7 @@
 	<!-- TOP NAV -->
   
 
-	<div id="page-container" class="container-fluid">
+	<div id="page-container" class="container-fluid bg-light">
 		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolore, rem, eveniet, officiis exercitationem aperiam doloribus quisquam id consectetur, minus voluptates molestias. Quis doloremque facilis veniam, assumenda libero obcaecati cupiditate?</p>
 	</div>
 
@@ -93,8 +136,11 @@
 
 <!-- include scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="js/menu.js"></script>
-<script src="js/main.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+<script defer src="/js/authInit.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- include scripts end-->
 </body>

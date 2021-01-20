@@ -29,6 +29,9 @@ window.addEventListener('load', () => {
 */
 Swiper(document.getElementById("sidenav"),closeSidebarNav,4)
 Swiper(document.getElementById("navControl"),openSidebarNav,2)
+
+document.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
+
 function openSidebarNav() {
 d=document;
   d.getElementById("sidenav").style.width = "80%";

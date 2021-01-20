@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '18-01-21'
+const Static_CACHE_Version = '20-01-21'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -12,10 +12,15 @@ const Static_CACHEAssets = [
     //js
     './js/main.js',
     './js/menu.js',
+    './js/authInit.js',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js',
+    'https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js',
+    'https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js',
     //icons
-     'favicon.ico',
+    './favicon.ico',
     './icons/android-chrome-192x192.png',
+    './icons/apple-touch-icon-precomposed.png',
+    './icons/GoogleLogo.svg',
     
     //fonts
     '/css/fonts/iconsfont.woff2',

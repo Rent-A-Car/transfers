@@ -15,6 +15,7 @@ https://fontello.com/
 }
 
  
+ 
  [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "iconsfont";
   font-style: normal;
@@ -50,17 +51,14 @@ https://fontello.com/
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-plus:before { content: '\2b'; } /* '+' */
-.icon-left:before { content: '\2190'; } /* '←' */
-.icon-edit:before { content: '\270d'; } /* '✍' */
-.icon-reload:before { content: '\27f3'; } /* '⟳' */
-.icon-comment:before { content: '\e718'; } /* '' */
 .icon-calendar-plus:before { content: '\e800'; } /* '' */
+.icon-menu:before { content: '\e818'; } /* '' */
 .icon-wifi-off:before { content: '\e801'; } /* '' */
 .icon-facebook:before { content: '\e802'; } /* '' */
 .icon-whatsapp:before { content: '\e803'; } /* '' */
 .icon-instagram:before { content: '\e804'; } /* '' */
 .icon-telegram:before { content: '\e805'; } /* '' */
+.icon-truck:before { content: '\e806'; } /* '' */
 .icon-bookmark-heart:before { content: '\e807'; } /* '' */
 .icon-bookmark-heart-fill:before { content: '\e808'; } /* '' */
 .icon-geo-alt-fill:before { content: '\e809'; } /* '' */
@@ -69,11 +67,15 @@ https://fontello.com/
 .icon-info:before { content: '\e80c'; } /* '' */
 .icon-people:before { content: '\e80d'; } /* '' */
 .icon-phone:before { content: '\e80e'; } /* '' */
+.icon-like:before { content: '\e80f'; } /* '' */
 .icon-three-dots-vertical:before { content: '\e810'; } /* '' */
+.icon-dislike:before { content: '\e811'; } /* '' */
+.icon-reload:before { content: '\e812'; } /* '' */
+.icon-comment:before { content: '\e813'; } /* '' */
+.icon-left:before { content: '\e814'; } /* '' */
+.icon-edit:before { content: '\e815'; } /* '' */
+.icon-plus:before { content: '\e816'; } /* '' */
+.icon-search:before { content: '\e817'; } /* '' */
 .icon-mail:before { content: '\f0e0'; } /* '' */
 .icon-like-fill:before { content: '\f164'; } /* '' */
 .icon-dislike-fill:before { content: '\f165'; } /* '' */
-.icon-like:before { content: '👍'; } /* '\1f44d' */
-.icon-dislike:before { content: '👎'; } /* '\1f44e' */
-.icon-search:before { content: '🔍'; } /* '\1f50d' */
-.icon-truck:before { content: '🚚'; } /* '\1f69a' */
