@@ -14,9 +14,25 @@
         "type": "image/png"
     }
 ],
-"start_url": "/?source=pwa",
+"start_url": "/",
 "background_color": "#50a7a0",
 "display": "standalone",
+"orientation": "portrait",
 "scope": "/",
-"theme_color": "#50a7a0"
+"theme_color": "#50a7a0",
+"shortcuts" : [
+  {
+    "name": "Рейсы",
+    "url": "/?p=home",
+    "description": "List of events planned for today"
+  },
+  {
+    "name": "Водители",
+    "url": "/?p=drivers"
+  },
+  {
+    "name": "Календарь",
+    "url": "/?p=calendar"
+  }
+]
 }
