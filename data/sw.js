@@ -14,8 +14,6 @@ const Static_CACHEAssets = [
     './js/menu.js',
     './js/authInit.js',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js',
-    'https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js',
-    'https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js',
     //icons
     './favicon.ico',
     './icons/android-chrome-192x192.png',
@@ -76,9 +74,9 @@ async function checkCache(req) {
 	if (req.method == "GET"){
 		let url = new URL(req.url)
 		
-		
 		const cachedResponse = await caches.match(req);
-		return cachedResponse || checkOnline(req);
+
+		return cachedResponse //|| checkOnline(req);
 
 	}else{
 		return await fetch(req);
@@ -90,7 +88,6 @@ async function checkOnline(req) {
     try {
         const res = await fetch(req);
         //await cache.put(req, res.clone());
-        console.log(res.clone())
         return res;
     } catch (error) {
     	console.log(error)
