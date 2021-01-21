@@ -23,16 +23,12 @@
 "shortcuts" : [
   {
     "name": "Рейсы",
-    "url": "/?p=home",
+    "url": "/",
     "description": "List of events planned for today"
   },
   {
     "name": "Водители",
     "url": "/?p=drivers"
-  },
-  {
-    "name": "Календарь",
-    "url": "/?p=calendar"
   }
 ]
 }
