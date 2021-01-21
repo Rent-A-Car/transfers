@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '20-01-21'
+const Static_CACHE_Version = '21-01-21-1c'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -12,7 +12,6 @@ const Static_CACHEAssets = [
     //js
     './js/main.js',
     './js/menu.js',
-    './js/authInit.js',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js',
     //icons
     './favicon.ico',
@@ -74,9 +73,10 @@ async function checkCache(req) {
 	if (req.method == "GET"){
 		let url = new URL(req.url)
 		
-		const cachedResponse = await caches.match(req);
+		const cacheS = await caches.open(Static_CACHE);
+		const StaticCachedResponse = await cacheS.match(req);
 
-		return cachedResponse //|| checkOnline(req);
+		return StaticCachedResponse || checkOnline(req);
 
 	}else{
 		return await fetch(req);
@@ -86,8 +86,9 @@ async function checkCache(req) {
 async function checkOnline(req) {
     const cache = await caches.open(DCACHE);
     try {
+    	console.log(req)
         const res = await fetch(req);
-        //await cache.put(req, res.clone());
+        await cache.put(req, res.clone());
         return res;
     } catch (error) {
     	console.log(error)

@@ -53,16 +53,11 @@ firebase.auth().signOut().then(() => {
 (document.getElementById("google-login-in"))?document.getElementById("google-login-in").addEventListener("click",loginIn):false;
 (document.getElementById("google-login-out"))?document.getElementById("google-login-out").addEventListener("click",loginOut):false;
 
+let loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {keyboard:false,backdrop:"static"})
 firebase.auth().onAuthStateChanged(function(user) {
-	loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
-		keyboard:false,
-		backdrop:"static"
-	})
   if (user) {
-    console.log("logged now",user)
-     loginModal.hide()
+    loginModal.hide()
   } else {
-    console.log("notlogged now",user)
-    loginModal.show()
+  	loginModal.show()
   }
 });
