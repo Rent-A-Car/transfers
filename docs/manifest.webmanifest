@@ -28,7 +28,8 @@
   },
   {
     "name": "Водители",
-    "url": "/?p=drivers"
+    "url": "/?p=drivers", 
+    "icons": [{ "src": "/icons/android-chrome-192x192.png", "sizes": "192x192" }]
   }
 ]
 }
