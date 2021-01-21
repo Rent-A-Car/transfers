@@ -1,6 +1,7 @@
 /*
 sw
 */
+d = document;
 window.addEventListener('load', () => {
 
     if ('serviceWorker' in navigator){
@@ -9,8 +10,8 @@ window.addEventListener('load', () => {
             .then(registration => {
                 if(registration.waiting){
                 	if(navigator.onLine){
-                		registration.update().then((urs)=>{
-                			window.console.log(urs)
+                		registration.unregister().then((urs)=>{
+                			window.location.reload();
                 		}).catch((e)=>{
                 			window.console.log(e)
                 		})
@@ -35,10 +36,10 @@ window.addEventListener('load', () => {
 /*
  sw end
 */
-Swiper(document.getElementById("sidenav"),closeSidebarNav,4)
-Swiper(document.getElementById("navControl"),openSidebarNav,2)
+Swiper(d.getElementById("sidenav"),closeSidebarNav,4)
+Swiper(d.getElementById("navControl"),openSidebarNav,2)
 
-document.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
+d.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
 
 function openSidebarNav() {
 d=document;
