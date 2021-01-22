@@ -88,16 +88,16 @@ color: #0a6bbb;
   align-items: center;
 }
 
-#menuopenbutton{
+.navbutton{
   padding: 0;
   border: 0;
   margin-right: 5.5px;
   border-radius: 23%;
   background-color: transparent;
 }
-#menuopenbutton:focus{
+.navbutton:focus, .navbutton:hover{
   outline:0;
-  background-color:unset;
+  background-color: unset;
 }
 
 #headlogo{
@@ -264,4 +264,14 @@ margin-right: 6.5px;
     color: #202124;
     display: inline-block;
     vertical-align: middle;
+}
+
+
+@media (min-width: 768px) { 
+
+.mx-md-auto{
+    margin-right: auto!important;
+    margin-left: auto!important;
+}
+
 }

@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-21-1c'
+const Static_CACHE_Version = '21-01-22-2b'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -31,12 +31,7 @@ const DCACHE= 'cache-auto';
 
 
 const ROUTETable={
-	'transfers.arendacg.space':{
-		'/index.html':"/"
-	},
-	'localhost:8080':{
-		'/index.html':"/"
-	}
+	
 }
 
 
@@ -71,22 +66,39 @@ self.addEventListener('fetch', event => {
 
 async function checkCache(req) {
 	if (req.method == "GET"){
-		let url = new URL(req.url)
+		let Rurl = new URL(req.url)
+		let nreq = req;
+		if (location.hostname == Rurl.hostname){
+			Rurl.search=""
+			nreq = new Request(Rurl.toString(),{
+				cache : req.cache,
+				context : req.context,
+				credentials: req.credentials,
+				headers : req.headers,
+				integrity : req.integrity,
+				method : req.method,
+				redirect : req.redirect,
+				referrer : req.referrer,
+				referrerPolicy : req.referrerPolicy,
+				body : req.body,
+				bodyUsed : req.bodyUsed
+				})
+		}
+		
+		
 		
 		const cacheS = await caches.open(Static_CACHE);
-		const StaticCachedResponse = await cacheS.match(req);
+		const StaticCachedResponse = await cacheS.match((nreq)?nreq:req);
 
-		return StaticCachedResponse || checkOnline(req);
+		return StaticCachedResponse || checkOnline((nreq)?nreq:req);
 
 	}else{
 		return await fetch(req);
 	}
 }
-
 async function checkOnline(req) {
     const cache = await caches.open(DCACHE);
     try {
-    	console.log(req)
         const res = await fetch(req);
         await cache.put(req, res.clone());
         return res;
@@ -95,7 +107,9 @@ async function checkOnline(req) {
         const cachedRes = await cache.match(req);
         if (cachedRes) {
             return cachedRes;
-        } 
+        }else{
+
+        }
        
     }
 }
