@@ -40,7 +40,7 @@ Swiper(d.getElementById("sidenav"),closeSidebarNav,4)
 Swiper(d.getElementById("navControl"),openSidebarNav,2)
 
 d.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
-d.getElementById("reloadnavbutton").addEventListener('click', location.reload);
+d.getElementById("reloadnavbutton").addEventListener('click', ()=>{window.location.reload()});
 function openSidebarNav() {
 d=document;
   d.getElementById("sidenav").style.width = "80%";
