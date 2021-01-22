@@ -116,7 +116,6 @@ async function checkOnline(req) {
          await cache.put(req, res.clone());
         }else{
         	console.log("noCACHED")
-        	return res;
         }
 
         return res;
