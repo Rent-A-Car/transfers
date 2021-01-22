@@ -92,12 +92,12 @@ color: #0a6bbb;
   padding: 0;
   border: 0;
   margin-right: 5.5px;
-  border-radius: 23%;
+  border-radius: 50%;
   background-color: transparent;
 }
 .navbutton:focus, .navbutton:hover{
   outline:0;
-  background-color: unset;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 #headlogo{
