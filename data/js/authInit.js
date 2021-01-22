@@ -1,6 +1,7 @@
 firebase.initializeApp({
 	apiKey: "AIzaSyChvee1gUsGHeV5rJ6JTCiFGTnVQlRbxKk",
-	authDomain: "transfers4me.firebaseapp.com",
+	//transfers4me.firebaseapp.com
+	authDomain: "auth.transfers.arendacg.space",
 	projectId: "transfers4me",
 	storageBucket: "transfers4me.appspot.com",
 	messagingSenderId: "264089197452",
