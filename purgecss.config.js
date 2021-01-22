@@ -1,1 +1,1 @@
-module.exports = {content: ['data/sw.js', 'data/js/menu.js', 'data/js/main.js', 'data/js/authInit.js', 'data/offline.html', 'data/index.html', 'data/404.html', 'data/icons/html_code.html']}
+module.exports = {content: ['data/sw.js', 'data/js/menu.js', 'data/js/main.js', 'data/js/authInit.js', 'data/TermsOfService.html', 'data/offline.html', 'data/index.html', 'data/install.html', 'data/PrivacyPolicy.html', 'data/404.html', 'data/icons/html_code.html']}
