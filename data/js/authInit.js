@@ -17,16 +17,8 @@ provider.addScope("openid")
 firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    console.log(result);
-    var credential = result.credential;
-
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
     firebase.auth().currentUser = result.user;
-    // ...
+    
   }).catch((error) => {
   	console.log(error);
 	let erAlrt = document.getElementById("errorLogin");
@@ -42,7 +34,7 @@ firebase.auth().signOut().then(() => {
   console.log("ok logout")
 }).catch((error) => {
   // An error happened.
-  console.log(error)
+  alert(error)
 });
 
 }
