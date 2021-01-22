@@ -29,14 +29,10 @@ firebase.auth()
     // ...
   }).catch((error) => {
   	console.log(error);
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
+	let erAlrt = document.getElementById("errorLogin");
+	erAlrt.classList.remove("d-none");
+    erAlrt.innerText = error.message;
+ 
   });
 }
 

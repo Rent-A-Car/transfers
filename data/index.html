@@ -23,7 +23,7 @@
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <!-- include css end -->
 </head>
-
+<body class="bg-light">
 
 <div id="SidebarOpasity" onclick="closeSidebarNav()"></div>
 <div class="bg-light border-right" id="sidenav">
@@ -53,12 +53,13 @@
 <p class="app-name-header">
 Transfers4Me
 </p>
-<div class="title-description">What's the best way to sign in?<br>Use your work email!</div>
+<div class="title-description">What's the best way to sign in?<br>Войдите, чтобы продолжить</div>
 </div>
 
 <div class="signUpWithLargeLabel">
 Sign in with:
 </div>
+<div id="errorLogin" class="alert alert-danger mt-3 d-none" role="alert"></div>
 <ul class="signProviders">
 <li class="sign-source">
 <button id="google-login-in">
@@ -85,7 +86,7 @@ By signing in, you agree to the <a href="/appinfo/termsofuse?appId=eb30bfd8-1838
 
 
 	<!-- TOP NAV -->
-<nav id="navControl" class="navbar navbar-expand navbar-light bg-white border-bottom">
+<nav id="navControl" class="navbar sticky-top navbar-expand navbar-light bg-white border-bottom" style="z-index: 2;">
 <div>
 	
 	<div id="headlogo"></div>
@@ -104,9 +105,12 @@ By signing in, you agree to the <a href="/appinfo/termsofuse?appId=eb30bfd8-1838
 </nav>
 	<!-- TOP NAV -->
   
+<div id="pagedataloading" style="position: fixed;transform: translateX(-50%) translateY(-50%);margin-top: 40vh;margin-left: 50%;" class=""><div class="spinner-grow" role="status" style="color: #50a7a0;">
+  <span class="visually-hidden">Loading...</span>
+</div></div>
 
-	<div id="page-container" class="container-fluid bg-light">
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolore, rem, eveniet, officiis exercitationem aperiam doloribus quisquam id consectetur, minus voluptates molestias. Quis doloremque facilis veniam, assumenda libero obcaecati cupiditate?</p>
+	<div id="page-container" class="container-fluid">
+		
 	</div>
 
 

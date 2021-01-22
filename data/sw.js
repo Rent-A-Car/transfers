@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-22-2b'
+const Static_CACHE_Version = '21-01-22-4a'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -30,16 +30,27 @@ const Static_CACHEAssets = [
 const DCACHE= 'cache-auto';
 
 
-const ROUTETable={
-	
-}
+const NoCACHE=[
+	"apis.google.com",
+	"www.googleapis.com"
+]
 
 
 
 
 self.addEventListener('install', async event => {
     const cache = await caches.open(Static_CACHE);
-    await cache.addAll(Static_CACHEAssets);
+    ec = 0;
+    for (var i = 0; i < 6; i++) {
+	try{
+    	await cache.addAll(Static_CACHEAssets);
+    	break;
+	}catch(e){
+		console.log(e)
+		ec = ec++
+	}
+   }
+    (ec==5)?self.registration.unregister(): console.log('Service worker fetch ok')
     console.log('Service worker встановлено');
 });
 
@@ -99,8 +110,15 @@ async function checkCache(req) {
 async function checkOnline(req) {
     const cache = await caches.open(DCACHE);
     try {
+    	let Rurl = new URL(req.url);
         const res = await fetch(req);
-        await cache.put(req, res.clone());
+        if(!(NoCACHE.includes(Rurl.hostname))) {
+         await cache.put(req, res.clone());
+        }else{
+        	console.log("noCACHED")
+        	return res;
+        }
+
         return res;
     } catch (error) {
     	console.log(error)
