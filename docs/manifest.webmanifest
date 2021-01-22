@@ -24,7 +24,7 @@
   {
     "name": "Рейсы",
     "url": "/",
-    "description": "List of events planned for today"
+    "icons": [{ "src": "/icons/android-chrome-192x192.png", "sizes": "192x192" }]
   },
   {
     "name": "Водители",
