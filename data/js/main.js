@@ -62,6 +62,6 @@ d=document;
   
 }
 
-
+//navigator.connection.onchange = ()=>{console.log(navigator.onLine)}
 
 //new Hammer(document.getElementById("navPages")).get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL}).manager.on("swipe",(e)=>{(e.direction == 2)?document.getElementById("page-container").append("left"):document.getElementById("page-container").append("right")})

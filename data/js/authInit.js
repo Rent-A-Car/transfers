@@ -1,7 +1,6 @@
 firebase.initializeApp({
 	apiKey: "AIzaSyChvee1gUsGHeV5rJ6JTCiFGTnVQlRbxKk",
-	//transfers4me.firebaseapp.com
-	authDomain: "auth.transfers.arendacg.space",
+	authDomain: "transfers4me.firebaseapp.com",
 	projectId: "transfers4me",
 	storageBucket: "transfers4me.appspot.com",
 	messagingSenderId: "264089197452",
@@ -12,20 +11,32 @@ let provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope("profile")
 provider.addScope("email")
 provider.addScope("openid")
-//provider.addScope("https://www.googleapis.com/auth/contacts")
-//provider.addScope("https://www.googleapis.com/auth/calendar")
+provider.addScope("https://www.googleapis.com/auth/profile.language.read")
+provider.addScope("https://www.googleapis.com/auth/user.phonenumbers.read")
+
 //firebase.auth().languageCode = 'sr';
 firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
+  	console.log(result)
+  	let storage=window.localStorage
+  	storage.setItem("randString",result.credential.accessToken)
+  	//go to server
+
     firebase.auth().currentUser = result.user;
-    
   }).catch((error) => {
   	console.log(error);
 	let erAlrt = document.getElementById("errorLogin");
+	(!erAlrt.innerText)?(error,erAlrt)=>{
+    erAlrt.innerText = error.message;
+		loginIn()
+	}:(error,erAlrt)=>{
 	erAlrt.classList.remove("d-none");
     erAlrt.innerText = error.message;
- 
+	}
+
+	
+
   });
 }
 

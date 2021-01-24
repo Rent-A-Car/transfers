@@ -22,7 +22,9 @@
 <link rel="stylesheet" href="/css/iconsfont.css">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <!-- include css end -->
-<script>(navigator.standalone||window.matchMedia('(display-mode:standalone)').matches)?0:window.location.replace("/install")</script>
+<script>(navigator.standalone||window.matchMedia('(display-mode:standalone)').matches)?0:()=>{
+	console.log("browser")
+}</script>
 </head>
 <body class="bg-light">
 
@@ -54,7 +56,7 @@
 <p class="app-name-header">
 Transfers4Me
 </p>
-<div class="title-description">What's the best way to sign in?<br>Войдите, чтобы продолжить</div>
+<div class="title-description">Все перевозки в одном приложении<br>Войдите, чтобы продолжить</div>
 </div>
 
 <div class="signUpWithLargeLabel">
@@ -76,8 +78,8 @@ Google
 </ul>
 
 <p id="privacy-notice">
-By signing in, you agree to the <a href="/appinfo/termsofuse?appId=eb30bfd8-1838-47d8-9740-0887b313318d" target="_self" rel="modal:open">terms of service</a> and
-<a href="/appinfo/privacypolicy?appId=eb30bfd8-1838-47d8-9740-0887b313318d" target="_self" rel="modal:open">privacy policy</a>.
+By signing in, you agree to the <a href="/TermsOfService">terms of service</a> and
+<a href="/PrivacyPolicy">privacy policy</a>.
 </p>
 </div>
 
@@ -116,8 +118,9 @@ By signing in, you agree to the <a href="/appinfo/termsofuse?appId=eb30bfd8-1838
 
 
  	<!-- PAGES NAV -->
-<nav id="navPages" class="navbar fixed-bottom navbar-light bg-white border-top py-0 justify-content-evenly" style="z-index: 2;box-shadow: rgba(0, 0, 0, 0.14) 3px 4px, rgba(0, 0, 0, 0.12) 0px 3px 3px, rgba(0, 0, 0, 0.2) 0px 1px 8px;color:#2196F3!important;">
-     
+<nav id="navPages" class="navbar fixed-bottom navbar-light bg-white border-top py-0 justify-content-evenly" style="z-index:2;box-shadow:rgba(0,0,0,0.14) 3px 4px, rgba(0,0,0,0.12) 0px 3px 3px, rgba(0,0,0,0.2) 0px 1px 8px;color:#2196F3!important;">
+    
+
     <button nav-id="2">
     <i class="icon-people"></i>
     <span>Водители</span>
@@ -131,6 +134,8 @@ By signing in, you agree to the <a href="/appinfo/termsofuse?appId=eb30bfd8-1838
     <i class="icon-calendar-plus"></i>
     <span>Календарь</span>
   </button>
+
+  
 
 </nav>
  	<!-- PAGES NAV -->

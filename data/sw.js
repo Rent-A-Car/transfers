@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-22-4'
+const Static_CACHE_Version = '21-01-23'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -30,11 +30,16 @@ const Static_CACHEAssets = [
 const DCACHE= 'cache-auto';
 
 
-const NoCACHE=[
+const NoCACHEHosts=[
 	"apis.google.com",
-	"www.googleapis.com"
+	"www.googleapis.com",
+	"securetoken.googleapis.com"
 ]
 
+const NoCACHEPaths=[
+"/TermsOfService",
+"/PrivacyPolicy"
+]
 
 
 
@@ -112,7 +117,7 @@ async function checkOnline(req) {
     try {
     	let Rurl = new URL(req.url);
         const res = await fetch(req);
-        if(!(NoCACHE.includes(Rurl.hostname))) {
+        if(!(NoCACHEHosts.includes(Rurl.hostname)) && (location.hostname == Rurl.hostname)?(NoCACHEPaths.filter((i,ii,iii,m=Rurl.pathname)=>{return m.match(i)}).length>0)?0:1:1) {
          await cache.put(req, res.clone());
         }else{
         	console.log("noCACHED")
