@@ -2,22 +2,22 @@ const Static_CACHE_Version = '21-01-24'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
-    './',
-    './offline.html',
+    '/',
+    '/offline.html',
     //css
-    './css/main.css',
-    './css/iconsfont.css',
-    './css/RobotoSlab.css',
-    './css/bootstrap.min.css',
+    '/css/main.css',
+    '/css/iconsfont.css',
+    '/css/RobotoSlab.css',
+    '/css/bootstrap.min.css',
     //js
-    './js/main.js',
-    './js/menu.js',
+    '/js/main.js',
+    '/js/menu.js',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js',
     //icons
-    './favicon.ico',
-    './icons/android-chrome-192x192.png',
-    './icons/apple-touch-icon-precomposed.png',
-    './icons/GoogleLogo.svg',
+    '/favicon.ico',
+    '/icons/android-chrome-192x192.png',
+    '/icons/apple-touch-icon-precomposed.png',
+    '/icons/GoogleLogo.svg',
     
     //fonts
     '/css/fonts/iconsfont.woff2',
@@ -25,7 +25,7 @@ const Static_CACHEAssets = [
     'https://fonts.gstatic.com/s/robotoslab/v12/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISma2RjRdE.woff2',
     'https://fonts.gstatic.com/s/robotoslab/v12/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISmb2Rj.woff2',
     //other
-   './manifest.webmanifest'
+    '/manifest.webmanifest'
 ];
 const DCACHE= 'cache-auto';
 
@@ -129,9 +129,9 @@ async function checkOnline(req) {
     try {
     	let Rurl = new URL(req.url);
         const res = await fetch(req);
-        if(!res.ok){
-        	throw "Resp not ok"
-        }
+        /*if(res.ok === false){
+        	throw "Resp not ok "+res.ok
+        }*/
         if(!(NoCACHEHosts.includes(Rurl.hostname)) && (location.hostname == Rurl.hostname)?(NoCACHEPaths.filter((i,ii,iii,m=Rurl.pathname)=>{return m.match(i)}).length>0)?0:1:1) {
          await cache.put(req, res.clone());
         }else{
