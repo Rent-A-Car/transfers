@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-23'
+const Static_CACHE_Version = '21-01-24'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -45,17 +45,29 @@ const NoCACHEPaths=[
 
 self.addEventListener('install', async event => {
     const cache = await caches.open(Static_CACHE);
-    ec = 0;
-    for (var i = 0; i < 6; i++) {
+    let ec = 0
+    for (var i = 0; i < 5; i++) {
 	try{
     	await cache.addAll(Static_CACHEAssets);
     	break;
 	}catch(e){
-		console.log(e)
-		ec = ec++
+		console.log(e,ec)
+		ec += 1
 	}
    }
-    (ec==5)?self.registration.unregister(): console.log('Service worker fetch ok')
+    if(ec==5){
+    	for (var i = 0; i < Static_CACHEAssets.length; i++) {
+    		try{
+    			await cache.add(Static_CACHEAssets[i])
+    		}catch(e){
+    			console.log(e,Static_CACHEAssets[i])
+    		}
+    	}
+
+
+    }else{
+    	console.log('Service worker fetch ok')
+    }
     console.log('Service worker встановлено');
 });
 
@@ -117,6 +129,9 @@ async function checkOnline(req) {
     try {
     	let Rurl = new URL(req.url);
         const res = await fetch(req);
+        if(!res.ok){
+        	throw "Resp not ok"
+        }
         if(!(NoCACHEHosts.includes(Rurl.hostname)) && (location.hostname == Rurl.hostname)?(NoCACHEPaths.filter((i,ii,iii,m=Rurl.pathname)=>{return m.match(i)}).length>0)?0:1:1) {
          await cache.put(req, res.clone());
         }else{
@@ -130,6 +145,13 @@ async function checkOnline(req) {
         if (cachedRes) {
             return cachedRes;
         }else{
+        	let type=new URL(req.url).pathname.match(/\.\w+/);
+        	if(type && type != ".html"){
+
+
+        	}else{
+        		return await caches.match("/offline.html")
+        	}
 
         }
        
