@@ -9,6 +9,7 @@ window.addEventListener('load', () => {
 
         navigator.serviceWorker.register('./sw.js')
             .then(registration => {
+            	registration.update()
                 if(registration.waiting){
                 	if(navigator.onLine){
                 		registration.unregister().then((urs)=>{

@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-24'
+const Static_CACHE_Version = '21-01-26-2'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -98,6 +98,10 @@ async function checkCache(req) {
 		let nreq = req;
 		if (location.hostname == Rurl.hostname){
 			Rurl.search=""
+			if(Rurl.pathname == "/index.html"){
+				Rurl.pathname="/"
+			}
+			
 			nreq = new Request(Rurl.toString(),{
 				cache : req.cache,
 				context : req.context,
@@ -129,10 +133,14 @@ async function checkOnline(req) {
     try {
     	let Rurl = new URL(req.url);
         const res = await fetch(req);
-        /*if(res.ok === false){
-        	throw "Resp not ok "+res.ok
-        }*/
-        if(!(NoCACHEHosts.includes(Rurl.hostname)) && (location.hostname == Rurl.hostname)?(NoCACHEPaths.filter((i,ii,iii,m=Rurl.pathname)=>{return m.match(i)}).length>0)?0:1:1) {
+        if(!navigator.onLine){
+        	throw "Offline"
+        }
+
+        let isBanedHost =NoCACHEHosts.includes(Rurl.hostname),
+        isBanedPath = (NoCACHEHosts.filter((i,ii,iii,m=Rurl.pathname)=>{return m.match(i)}).length>0)
+
+        if(!isBanedHost && !isBanedPath) {
          await cache.put(req, res.clone());
         }else{
         	console.log("noCACHED")
