@@ -129,7 +129,7 @@ template = `
 let ModalMode=0;
 
 const detectBrowserType=()=>{
-	
+
 }
 
 
@@ -148,9 +148,9 @@ const beforeInstallPrompt = (event)=>{
 			  var myWindow = window.open("", "_self");
   				myWindow.document.write("");
   				alert("Откройте приложение после установки на ваше устройство")
-  				setTimeout (function() {myWindow.close();},1000);
+  				setTimeout (function() {myWindow.close()},1000);
 
-		}else{Откройте приложение после установки на ваше устройство
+		}else{
 			console.log("noinstall")
 			(window.location.reload())?1:(confirm())?window.location.reload():window.location.href="/?n"
 		}
