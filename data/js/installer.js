@@ -127,6 +127,20 @@ template = `
     
 }
 let ModalMode=0;
+function leave() {
+a=document.createElement("a")
+a.href="/"
+a.target="_blank"
+document.body.appendChild(a)
+a.click()
+  var myWindow = window.open("", "_self");
+  myWindow.document.write("");
+  setTimeout (function() {myWindow.close();},1000);
+}
+window.addEventListener('appinstalled', (evt) => {
+  leave()
+  console.log('INSTALL: Success',evt);
+});
 const beforeInstallPrompt = (event)=>{
 	event.preventDefault();
 	window.console.log(event);
@@ -136,7 +150,15 @@ const beforeInstallPrompt = (event)=>{
 		beforeInstallEvent.prompt();
 	});
 	event.userChoice.then((result)=>{
-		window.location.reload()
+		if(result.outcome=="accepted"){
+			console.log("install")
+			alert("start installing")
+
+		}else{
+			console.log("noinstall")
+			window.location.reload()
+		}
+
 	},console.log)
 }
 

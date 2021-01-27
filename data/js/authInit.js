@@ -52,6 +52,7 @@ firebase.auth()
 
 	}
 	erAlrt.classList.remove("d-none");
+	loginOut()
     
 
 	
