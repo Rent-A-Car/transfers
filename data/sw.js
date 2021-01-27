@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-27'
+const Static_CACHE_Version = '21-01-27-2'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -39,7 +39,7 @@ const NoCACHEHosts=[
 const NoCACHEPaths=[
 "/TermsOfService",
 "/PrivacyPolicy",
-"/cdn-cgi/*"
+"/cdn-cgi"
 ]
 
 
@@ -134,6 +134,7 @@ async function checkOnline(req) {
     try {
     	let Rurl = new URL(req.url);
         const res = await fetch(req);
+        console.log("fetch to",req.url)
         if(!navigator.onLine){
         	throw "Offline"
         }
@@ -156,7 +157,7 @@ async function checkOnline(req) {
         }else{
         	let type=new URL(req.url).pathname.match(/\.\w+/);
         	if(type && type != ".html"){
-
+        		return new Response(new Blob(),{ "status" : 503 , "statusText" : "You Offline!" })
 
         	}else{
         		return await caches.match("/offline.html")

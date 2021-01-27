@@ -5,13 +5,6 @@ firebase.initializeApp({
 	storageBucket: "transfers4me.appspot.com",
 	messagingSenderId: "264089197452",
 	appId: "1:264089197452:web:8aac1bb44f6f0b94a054a9",
-	scopes: [
-             "profile",
-             "email",
-             "openid",
-             "https://www.googleapis.com/auth/user.phonenumbers.read"
-
-    ]
 });
 const loginIn = (Ascope)=>{
 let provider = new firebase.auth.GoogleAuthProvider();
@@ -49,18 +42,22 @@ firebase.auth()
 
     firebase.auth().currentUser = result.user;
   }).catch((error) => {
-  	console.log(error,"fromcatch");
+  	console.log(error);
 	let erAlrt = document.getElementById("errorLogin");
 	switch(error.code){
 		case "auth/user-disabled":
 		erAlrt.innerHTML = "Ваш аккаунт заблокирован. Свяжитесь с <a class=text-secondary href=mailto:arendamontenegro.car+transfers@gmail.com>администратором</a>"
+		break;
+		case "login/no-phone-accept":
+		erAlrt.innerText = error.message;
+		firebase.auth().currentUser.delete()
 		break;
 		default:
 		erAlrt.innerText = error.message;
 
 	}
 	erAlrt.classList.remove("d-none");
-	loginOut()
+	console.log("show error")
     
 
 	
@@ -71,6 +68,7 @@ firebase.auth()
 const loginOut = ()=>{
 firebase.auth().signOut().then(() => {
   // Sign-out successful.
+  document.getElementById("errorLogin").classList.add("d-none")
   console.log("ok logout")
   window.localStorage.setItem("auth",false);
 }).catch((error) => {
@@ -85,9 +83,8 @@ firebase.auth().signOut().then(() => {
 let loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {keyboard:false,backdrop:"static"})
 firebase.auth().onAuthStateChanged(function(user) {
   if (user && window.localStorage.getItem("auth")) {
-    loginModal.hide()
     console.log("hide",user)
-    document.getElementById("errorLogin").classList.add("d-none")
+    loginModal.hide()
   } else {
   	loginModal.show()
   	console.log("show")
