@@ -127,20 +127,6 @@ template = `
     
 }
 let ModalMode=0;
-function leave() {
-a=document.createElement("a")
-a.href="/"
-a.target="_blank"
-document.body.appendChild(a)
-a.click()
-  var myWindow = window.open("", "_self");
-  myWindow.document.write("");
-  setTimeout (function() {myWindow.close();},1000);
-}
-window.addEventListener('appinstalled', (evt) => {
-  leave()
-  console.log('INSTALL: Success',evt);
-});
 const beforeInstallPrompt = (event)=>{
 	event.preventDefault();
 	window.console.log(event);
@@ -152,11 +138,14 @@ const beforeInstallPrompt = (event)=>{
 	event.userChoice.then((result)=>{
 		if(result.outcome=="accepted"){
 			console.log("install")
-			alert("start installing")
+			  var myWindow = window.open("", "_self");
+  				myWindow.document.write("");
+  				alert("Откройте приложение после установки на ваше устройство")
+  				setTimeout (function() {myWindow.close();},1000);
 
-		}else{
+		}else{Откройте приложение после установки на ваше устройство
 			console.log("noinstall")
-			window.location.reload()
+			(window.location.reload())?1:(confirm())?window.location.reload():window.location.href="/?n"
 		}
 
 	},console.log)
