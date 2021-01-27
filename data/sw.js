@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-26-2'
+const Static_CACHE_Version = '21-01-27'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -38,7 +38,8 @@ const NoCACHEHosts=[
 
 const NoCACHEPaths=[
 "/TermsOfService",
-"/PrivacyPolicy"
+"/PrivacyPolicy",
+"/cdn-cgi/*"
 ]
 
 

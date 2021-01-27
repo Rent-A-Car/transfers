@@ -127,6 +127,13 @@ template = `
     
 }
 let ModalMode=0;
+
+const detectBrowserType=()=>{
+	
+}
+
+
+
 const beforeInstallPrompt = (event)=>{
 	event.preventDefault();
 	window.console.log(event);
@@ -153,6 +160,8 @@ const beforeInstallPrompt = (event)=>{
 
 if ("onbeforeinstallprompt" in window) {
 	  window.addEventListener("beforeinstallprompt", beforeInstallPrompt);
+	  console.log("bipr")
 }else{
 	detectBrowserType();
+	console.log("Nbipr")
 }
