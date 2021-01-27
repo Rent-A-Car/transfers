@@ -4,7 +4,14 @@ firebase.initializeApp({
 	projectId: "transfers4me",
 	storageBucket: "transfers4me.appspot.com",
 	messagingSenderId: "264089197452",
-	appId: "1:264089197452:web:8aac1bb44f6f0b94a054a9"
+	appId: "1:264089197452:web:8aac1bb44f6f0b94a054a9",
+	scopes: [
+             "profile",
+             "email",
+             "openid",
+             "https://www.googleapis.com/auth/user.phonenumbers.read"
+
+    ]
 });
 const loginIn = (Ascope)=>{
 let provider = new firebase.auth.GoogleAuthProvider();
@@ -26,17 +33,18 @@ if(Ascope){
 firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
-  	console.log(result)
+  	//console.log(result)
 
   	let scopes =result.additionalUserInfo.profile.granted_scopes.split(" ")
-
+  	let storage=window.localStorage
   	if(!scopes.includes("https://www.googleapis.com/auth/user.phonenumbers.read")){
-  		return Promise.reject({code:"login/no-phone-accept",message:"Для авторизации разрешите доступ до вашего номера телефона"})
+  		storage.setItem("auth",false)
+  		throw {code:"login/no-phone-accept",message:"Для авторизации разрешите доступ до вашего номера телефона"}
   	}
 
-  	let storage=window.localStorage
+  	
   	storage.setItem("token",result.credential.accessToken.split("").reverse().join(""))
-  	storage.setItem("scopes",result.additionalUserInfo.profile.granted_scopes)
+  	storage.setItem("auth",true)
   	//go to server
 
     firebase.auth().currentUser = result.user;
@@ -64,6 +72,7 @@ const loginOut = ()=>{
 firebase.auth().signOut().then(() => {
   // Sign-out successful.
   console.log("ok logout")
+  window.localStorage.setItem("auth",false);
 }).catch((error) => {
   // An error happened.
   alert(error)
@@ -75,9 +84,10 @@ firebase.auth().signOut().then(() => {
 
 let loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {keyboard:false,backdrop:"static"})
 firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
+  if (user && window.localStorage.getItem("auth")) {
     loginModal.hide()
     console.log("hide",user)
+    document.getElementById("errorLogin").classList.add("d-none")
   } else {
   	loginModal.show()
   	console.log("show")

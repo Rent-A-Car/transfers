@@ -130,13 +130,13 @@ let ModalMode=0;
 
 const detectBrowserType=()=>{
 
+
+
 }
-
-
 
 const beforeInstallPrompt = (event)=>{
 	event.preventDefault();
-	window.console.log(event);
+	//window.console.log(event);
 	let beforeInstallEvent = event;
 	renderInstallModal(1);
 	document.getElementById("beforeInstallButton").addEventListener("click", ()=>{
