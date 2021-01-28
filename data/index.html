@@ -22,8 +22,7 @@
 <link rel="stylesheet" href="/css/iconsfont.css">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <!-- include css end -->
-<script>(!(navigator.standalone||window.matchMedia('(display-mode:standalone)').matches))?(()=>{s=document.createElement("script");s.src="/js/installer.js";s.defer=1;document.head.appendChild(s)})():0;
-</script>
+<script>(!(navigator.standalone||window.matchMedia('(display-mode:standalone)').matches))?(()=>{s=document.createElement("script");s.src="/js/installer.js";s.defer=1;document.head.appendChild(s)})():0;</script>
 </head>
 <body class="bg-light">
 
@@ -40,7 +39,7 @@
 
 <div id="main-page">
 
-<!-- Modal -->
+<!-- Modal login -->
 <div class="modal fadeIn" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
@@ -96,7 +95,8 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 <div>
 	
 	<div><button class=navbutton id="searchnavbutton"><i class="icon-search"></i></i></button></div>
-	<div><button class=navbutton id="reloadnavbutton"><i class="icon-reload"></i></button></div>
+	<div><button class="navbutton d-none" id="reloadnavbutton"><i class="icon-reload"></i></button></div>
+	<div><button class=navbutton id="offlinnavbutton"><i class="icon-wifi-off"></i></button></div>
 	<div><button class="navbutton d-none" id="mmenunavbutton"><i class="icon-three-dots-vertical"></i></button></div>
 
 </div>

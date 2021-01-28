@@ -1,4 +1,4 @@
-
+let CONETCSTATE = 1;
 /*
 sw
 */
@@ -41,8 +41,26 @@ window.addEventListener('load', () => {
 Swiper(d.getElementById("sidenav"),closeSidebarNav,4)
 Swiper(d.getElementById("navControl"),openSidebarNav,2)
 
+const DetectConection=()=>{
+	if(navigator.onLine){
+		d.getElementById("reloadnavbutton").classList.remove("d-none")
+		d.getElementById("offlinnavbutton").classList.add("d-none")
+	}else{
+		d.getElementById("reloadnavbutton").classList.add("d-none")
+		d.getElementById("offlinnavbutton").classList.remove("d-none")
+	}
+}
+if (navigator.connection){
+	if("onchange" in navigator.connection){
+		navigator.connection.addEventListener("onchange",DetectConection)
+	}else if ("ontypechange" in navigator.connection){
+		navigator.connection.addEventListener("ontypechange",DetectConection)
+	}
+	DetectConection()
+}
+
 d.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
-d.getElementById("reloadnavbutton").addEventListener('click', ()=>{window.location.reload()});
+d.getElementById("reloadnavbutton").addEventListener('click',()=>{window.location.reload()});
 function openSidebarNav() {
 d=document;
   d.getElementById("sidenav").style.width = "80%";
