@@ -39,22 +39,29 @@ window.addEventListener('load', () => {
  sw end
 */
 Swiper(d.getElementById("sidenav"),closeSidebarNav,4)
-Swiper(d.getElementById("navControl"),openSidebarNav,2)
+//Swiper(d.getElementById("navControl"),openSidebarNav,2)
 
 const DetectConection=()=>{
 	if(navigator.onLine){
+		console.log("online")
+		CONETCSTATE = 1
 		d.getElementById("reloadnavbutton").classList.remove("d-none")
 		d.getElementById("offlinnavbutton").classList.add("d-none")
 	}else{
+		console.log("offline")
+		CONETCSTATE = 0
 		d.getElementById("reloadnavbutton").classList.add("d-none")
 		d.getElementById("offlinnavbutton").classList.remove("d-none")
 	}
 }
 if (navigator.connection){
+	console.log("have conn")
 	if("onchange" in navigator.connection){
-		navigator.connection.addEventListener("onchange",DetectConection)
+		console.log("have onchange")
+		navigator.connection.onchange = DetectConection
 	}else if ("ontypechange" in navigator.connection){
-		navigator.connection.addEventListener("ontypechange",DetectConection)
+		console.log("have ontypechange")
+		navigator.connection.ontypechange=DetectConection
 	}
 	DetectConection()
 }

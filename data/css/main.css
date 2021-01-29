@@ -75,7 +75,10 @@ color: #0a6bbb;
 #navPages >  [nav-id] *{
   display: block;
 }
-
+#navPages.d-none{
+  display: flex!important;
+  transform: translateY(100%)!important;
+}
 
 
 

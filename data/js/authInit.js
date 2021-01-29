@@ -11,7 +11,6 @@ let provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope("profile")
 provider.addScope("email")
 provider.addScope("openid")
-provider.addScope("https://www.googleapis.com/auth/user.phonenumbers.read")
 if(Ascope){
 	if(typeof Ascope == "object"){
 		for (var i = 0; i < Ascope.length; i++) {
@@ -26,19 +25,21 @@ if(Ascope){
 firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
-  	//console.log(result)
+  	console.log(result)
 
   	let scopes =result.additionalUserInfo.profile.granted_scopes.split(" ")
   	let storage=window.localStorage
+  	/*
   	if(!scopes.includes("https://www.googleapis.com/auth/user.phonenumbers.read")){
   		storage.setItem("auth",false)
   		throw {code:"login/no-phone-accept",message:"Для авторизации разрешите доступ до вашего номера телефона"}
   	}
-
+	*/
   	
   	storage.setItem("token",result.credential.accessToken.split("").reverse().join(""))
   	storage.setItem("auth",true)
   	//go to server
+
 
     firebase.auth().currentUser = result.user;
   }).catch((error) => {
@@ -83,10 +84,9 @@ firebase.auth().signOut().then(() => {
 let loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {keyboard:false,backdrop:"static"})
 firebase.auth().onAuthStateChanged(function(user) {
   if (user && window.localStorage.getItem("auth")) {
-    console.log("hide",user)
     loginModal.hide()
+    firebase.auth().currentUser = user;
   } else {
   	loginModal.show()
-  	console.log("show")
   }
 });

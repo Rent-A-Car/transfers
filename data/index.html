@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <!-- icons -->
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
@@ -87,17 +89,19 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 <div>
 	
 	<div id="headlogo"></div>
-	<div><button class=navbutton id="menuopenbutton"><i class="icon-menu"></i></button><button class="navbutton d-none" id="backnavbutton"><i class="icon-left"></i></button></div>
+	<div><button class="navbutton d-none" id="menuopenbutton"><i class="icon-menu"></i></button>
+		 <button class="navbutton d-none" id="backnavbutton"><i  class="icon-back"></i></button></div>
 	<div id="pageName">Рейсы</div>
 
 </div>
 <div></div>
 <div>
 	
-	<div><button class=navbutton id="searchnavbutton"><i class="icon-search"></i></i></button></div>
+	<div><button class="navbutton d-none" id="searchnavbutton"><i class="icon-search"></i></i></button></div>
+	<div><button class="navbutton d-none" id="searchclsbutton"><i class="icon-cancel"></i></i></button></div>
 	<div><button class="navbutton d-none" id="reloadnavbutton"><i class="icon-reload"></i></button></div>
-	<div><button class=navbutton id="offlinnavbutton"><i class="icon-wifi-off"></i></button></div>
-	<div><button class="navbutton d-none" id="mmenunavbutton"><i class="icon-three-dots-vertical"></i></button></div>
+	<div><button class="navbutton d-none" id="offlinnavbutton"><i class="icon-wifi-off"></i></button></div>
+	<div><button class="navbutton d-none" id="mmenunavbutton"><i  class="icon-three-dots-vertical"></i></button></div>
 
 </div>
 </nav>
@@ -113,7 +117,7 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 
 
  	<!-- PAGES NAV -->
-<nav id="navPages" class="navbar fixed-bottom navbar-light bg-white border-top py-0 justify-content-evenly" style="z-index:2;box-shadow:rgba(0,0,0,0.14) 3px 4px, rgba(0,0,0,0.12) 0px 3px 3px, rgba(0,0,0,0.2) 0px 1px 8px;color:#2196F3!important;">
+<nav id="navPages" class="navbar fixed-bottom navbar-light bg-white border-top py-0 justify-content-evenly d-none" style="z-index:2;box-shadow:rgba(0,0,0,0.14) 3px 4px, rgba(0,0,0,0.12) 0px 3px 3px, rgba(0,0,0,0.2) 0px 1px 8px;color:#2196F3!important;">
     
 
     <button nav-id="2">
@@ -144,6 +148,7 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 <script defer src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
 <script defer src="/js/authInit.js"></script>
+<script src="/js/router.js"></script>
 <script src="/js/menu.js"></script>
 <script src="/js/main.js"></script>
 
