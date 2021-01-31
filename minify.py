@@ -1,4 +1,4 @@
-import htmlmin,os,requests,json
+import htmlmin,os,requests,json,re
 from pathlib import Path
 
 htmlFiles = list(Path('data').glob('**/*.html'))
@@ -44,6 +44,7 @@ for pA in htmlFiles:
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
 
+minerreg = r"(\/\/\ Error\ : )(.*\n.*\n.*)"
 
 jsurl = 'https://javascript-minifier.com/raw'
 
@@ -52,8 +53,12 @@ for pA in jsFiles:
         with open(pA,'rb') as f:
             os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
             jsdata = {'input': f.read()}
-            with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
-                ff.write(requests.post(jsurl, data=jsdata).text.encode())
+            with open('docs/'+'.'.join(str(pA)[5:].split('.')),'w') as ff:
+                jsansw = requests.post(jsurl, data=jsdata).text
+                if not re.match(minerreg,jsansw):
+                    print(jsansw)
+                    os.exit(1)
+                ff.write(jsansw)
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
@@ -66,8 +71,12 @@ for pA in cssFiles:
         f = json.loads(os.popen('purgecss -c purgecss.config.js -css '+str(pA)).read())[0]['css']
         os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
         cssdata = {'input': f.encode()}
-        with open('docs/'+'.'.join(str(pA)[5:].split('.')),'wb') as ff:
-            ff.write(requests.post(cssurl, data=cssdata).text.encode())
+        with open('docs/'+'.'.join(str(pA)[5:].split('.')),'w') as ff:
+            cssansw = requests.post(cssurl, data=cssdata).text
+            if not re.match(minerreg,cssansw):
+                    print(cssansw)
+                    os.exit(1)
+            ff.write(cssansw)
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)
