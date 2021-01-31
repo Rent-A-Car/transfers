@@ -25,7 +25,7 @@ const PAGEDATA={
 	}
 
 }
-
+]
 
 const PAGERENDER={
 	home:console.log,
@@ -33,7 +33,7 @@ const PAGERENDER={
 		setTimeout (function() {document.getElementById("pagedataloading").classList.add("d-none");},3000);
 		
 	},
-	calendar=console.log
+	calendar:console.log
 
 }
 
