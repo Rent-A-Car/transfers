@@ -55,9 +55,9 @@ for pA in jsFiles:
             jsdata = {'input': f.read()}
             with open('docs/'+'.'.join(str(pA)[5:].split('.')),'w') as ff:
                 jsansw = requests.post(jsurl, data=jsdata).text
-                if not re.match(minerreg,jsansw):
+                if re.match(minerreg,jsansw):
                     print(jsansw)
-                    os.exit(1)
+                    exit(1)
                 ff.write(jsansw)
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
@@ -73,9 +73,9 @@ for pA in cssFiles:
         cssdata = {'input': f.encode()}
         with open('docs/'+'.'.join(str(pA)[5:].split('.')),'w') as ff:
             cssansw = requests.post(cssurl, data=cssdata).text
-            if not re.match(minerreg,cssansw):
+            if re.match(minerreg,cssansw):
                     print(cssansw)
-                    os.exit(1)
+                    exit(1)
             ff.write(cssansw)
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
