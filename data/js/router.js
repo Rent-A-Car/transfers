@@ -21,7 +21,7 @@ const PAGEDATA={
 			title:"Календарь",
 			top:"bnn",
 			nav:"h"
-		}]
+		}
 	}
 
 }
