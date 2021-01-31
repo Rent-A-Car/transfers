@@ -25,7 +25,6 @@ const PAGEDATA={
 	}
 
 }
-]
 
 const PAGERENDER={
 	home:console.log,
