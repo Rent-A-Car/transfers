@@ -72,11 +72,7 @@ for pA in cssFiles:
         os.makedirs(os.path.dirname('docs/'+'.'.join(str(pA)[5:].split('.'))), exist_ok=True)
         cssdata = {'input': f.encode()}
         with open('docs/'+'.'.join(str(pA)[5:].split('.')),'w') as ff:
-            cssansw = requests.post(cssurl, data=cssdata).text
-            if re.match(minerreg,cssansw):
-                    print(cssansw)
-                    exit(1)
-            ff.write(cssansw)
+            ff.write(requests.post(cssurl, data=cssdata).text)
     elif(os.path.isdir(pA)):
         if(os.path.exists(pA)):
             os.makedirs('docs/'+'.'.join(str(pA)[5:].split('.')),exist_ok=True)

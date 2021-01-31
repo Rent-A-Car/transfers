@@ -1,3 +1,26 @@
+//   Render  functions
+
+const fetchCSV=(url)=>{
+	return new Promise((resolve, reject)=>{
+		fetch(url).then((r)=>{
+			return r.text()
+		}).then((r)=>{
+			resolve(CSV.csvToObject(r,{trim:!0}))
+		}).catch((e)=>{
+			reject(e)
+		})
+	});
+}
+
+let rPagehome = ()=>{
+	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv")
+	temp="";
+Promise.all([data, temp]).then((values) => {
+  console.log(values);
+});
+}
+
+//end of render functions
 const PAGEDATA={
 	home:{
 		control:{
@@ -15,7 +38,18 @@ const PAGEDATA={
 			navTab:"2"
 		}
 
-	},
+	}
+	/*,drivers:{
+		control:{
+			title:"Сергей Шавела",
+			top:"bnm",
+			nav:"h",
+			menu:[
+				
+			]
+		}
+
+	}*/,
 	calendar:{
 		control:{
 			title:"Календарь",
@@ -27,7 +61,7 @@ const PAGEDATA={
 }
 
 const PAGERENDER={
-	home:console.log,
+	home:rPagehome,
 	drivers:()=>{
 		setTimeout (function() {document.getElementById("pagedataloading").classList.add("d-none");},3000);
 		
@@ -66,14 +100,16 @@ let pdata = PAGEDATA[page] || {
 		sessionStorage.setItem('pdata',JSON.stringify(pdata))
 	}
 
-	if ("page" in sessionStorage){
-		return [page,pdata]
-	}else if(ourl.searchParams.has("p")){
+	if(ourl.searchParams.has("p")){
 		p = ourl.searchParams.get("p").toLowerCase() || "home"
 		sessionStorage.setItem('page',p)
-		(p in PAGEDATA)?sessionStorage.setItem('pdata',JSON.stringify(PAGEDATA[p])):0;
+		if(p in PAGEDATA){
+			sessionStorage.setItem('pdata',JSON.stringify(PAGEDATA[p]))
+		}
 		window.history.replaceState(null, null, "/");
-		return [p,pdata]
+		return [p,PAGEDATA[p]]
+	}else if ("page" in sessionStorage){
+		return [page,pdata]
 	}else{
 		sessionStorage.setItem('page',"home")
 		return ["home",PAGEDATA.home]
@@ -103,10 +139,11 @@ data = {
 		page:"/"
 	}
 }
-
 */
+
 const go2Page = (page,data)=>{
 	d = document;
+	console.log(page,data)
 	if(data){
 		(typeof data == "string")?data = PAGEDATA[data]:0;
 		if (data.control){	

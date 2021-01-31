@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-01-28-2'
+const Static_CACHE_Version = '21-02-01'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -12,7 +12,9 @@ const Static_CACHEAssets = [
     //js
     '/js/main.js',
     '/js/menu.js',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js',
+    '/js/ucsv.js',
+    '/js/router.js',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js',
     //icons
     '/favicon.ico',
     '/icons/android-chrome-192x192.png',
