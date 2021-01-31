@@ -1,3 +1,7 @@
+("firebase" in window && CONETCSTATE)?0:(()=>{
+	go2Page(...curPage())
+})();
+
 firebase.initializeApp({
 	apiKey: "AIzaSyChvee1gUsGHeV5rJ6JTCiFGTnVQlRbxKk",
 	authDomain: "transfers4me.firebaseapp.com",
@@ -86,6 +90,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user && window.localStorage.getItem("auth")) {
     loginModal.hide()
     firebase.auth().currentUser = user;
+    go2Page(...curPage())
   } else {
   	loginModal.show()
   }

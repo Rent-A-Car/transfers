@@ -91,7 +91,7 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 	<div id="headlogo"></div>
 	<div><button class="navbutton d-none" id="menuopenbutton"><i class="icon-menu"></i></button>
 		 <button class="navbutton d-none" id="backnavbutton"><i  class="icon-back"></i></button></div>
-	<div id="pageName">Рейсы</div>
+	<div id="pageName">Transfers4Me</div>
 
 </div>
 <div></div>
@@ -101,7 +101,10 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 	<div><button class="navbutton d-none" id="searchclsbutton"><i class="icon-cancel"></i></i></button></div>
 	<div><button class="navbutton d-none" id="reloadnavbutton"><i class="icon-reload"></i></button></div>
 	<div><button class="navbutton d-none" id="offlinnavbutton"><i class="icon-wifi-off"></i></button></div>
-	<div><button class="navbutton d-none" id="mmenunavbutton"><i  class="icon-three-dots-vertical"></i></button></div>
+	<div><button class="navbutton d-none" id="mmenunavbutton" data-bs-toggle="dropdown" aria-expanded="false"><i class="icon-three-dots-vertical"></i></button>
+	<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="mmenunavbutton"></ul>
+	</div>
+
 
 </div>
 </nav>
@@ -120,16 +123,16 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 <nav id="navPages" class="navbar fixed-bottom navbar-light bg-white border-top py-0 justify-content-evenly d-none" style="z-index:2;box-shadow:rgba(0,0,0,0.14) 3px 4px, rgba(0,0,0,0.12) 0px 3px 3px, rgba(0,0,0,0.2) 0px 1px 8px;color:#2196F3!important;">
     
 
-    <button nav-id="2">
+    <button data-nav-id="2" onclick="go2Page('drivers','drivers')">
     <i class="icon-people"></i>
     <span>Водители</span>
   </button>
-    <button class="active" nav-id="1">
+    <button data-nav-id="1" onclick="go2Page('home','home')">
     <i class="icon-truck"></i>
     <span>Рейсы</span>
   </button>
 
-  <button nav-id="3">
+    <button data-nav-id="3" onclick="go2Page('calendar','calendar')">
     <i class="icon-calendar-plus"></i>
     <span>Календарь</span>
   </button>
@@ -144,7 +147,9 @@ By signing in, you agree to the <a href="/TermsOfService">terms of service</a> a
 
 
 <!-- include scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
 <script defer src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
 <script defer src="/js/authInit.js"></script>

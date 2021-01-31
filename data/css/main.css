@@ -47,7 +47,7 @@ transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   padding-left: 8px;
   padding-right: 8px;
 }
-#navPages > [nav-id] {
+#navPages > [data-nav-id] {
     max-height: 124px;
     min-width: 99px;
     height: 100%;
@@ -60,19 +60,19 @@ transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     border: none!important;
     color: #757575;
 }
-#navPages >  [nav-id]:focus{
+#navPages >  [data-nav-id]:focus{
   outline:0;
 }
-#navPages >  [nav-id].active {
+#navPages >  [data-nav-id].active {
 color: inherit;
 }
-#navPages >  [nav-id]:hover {
+#navPages >  [data-nav-id]:hover {
 color: #0a6bbb;
 }
 [class^="icon-"], [class*=" icon-"]{
   font-size: 24px;
 }
-#navPages >  [nav-id] *{
+#navPages >  [data-nav-id] *{
   display: block;
 }
 #navPages.d-none{
