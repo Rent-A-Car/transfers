@@ -9,7 +9,7 @@ body{
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 4;
+  z-index: 8;
   top: 0;
   left: 0;
   background-color: #111;
@@ -26,7 +26,7 @@ body{
 height: 100%;
 width: 0;
 position: fixed;
-z-index: 3;
+z-index: 6;
 top: 0;
 left: 0;
 background-color: rgba(0,0,0, 0.5);
@@ -280,3 +280,5 @@ margin-right: 6.5px;
 }
 
 }
+/*https://codepen.io/gornostay25/pen/RwoNOgx*/
+.flags-shema{padding:.3em;position:relative}.flags-shema div{width:1.6em;height:1.6em;border-radius:50%;z-index:2}.flags-shema div:after{content:attr(country);margin-left:0;margin-top:1.4em;display:inline-block;text-transform:uppercase}.flags-shema .line{position:absolute;display:block;top:0;bottom:0;left:.3em;right:.3em;margin:auto;background:#807e78;height:.3em;z-index:1}

@@ -43,14 +43,42 @@ const fetchCSV=(url)=>{
 
 let rPagehome = ()=>{
 	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv")
-	temp=fetch("/pages/home.html").then((r)=>{return r.text()})
-	finalOutput="";
+	temp=fetch("/pages/home.html").then((r)=>{return r.text()}).then((r)=>{return new DOMParser().parseFromString(r,"text/html").querySelector("[template]")})
+	routs={}
+	finalOutput=""
 Promise.all([data, temp]).then((values) => {
   for (var i = 0; i < values[0].length; i++) {
-  	finalOutput += values[1].formatUnicorn(values[0][i])
+  	if(values[0][i].route in routs){
+  		routs[values[0][i].route].push(values[0][i])
+  	}else{
+  		routs[values[0][i].route]=[]
+  	}
   }
+  for (x in routs){
+  	r = x.split(";");
+  	t = values[1].cloneNode(!0)
+  	crdshhdr = t.querySelector(".flags-shema")
+  	cntry = crdshhdr.querySelector("div")
+  	cntry.setAttribute("country",r[0])
+  	for (var i = 1; i < r.length; i++) {
+  		ncntry = cntry.cloneNode()
+  		ncntry.setAttribute("country",r[i])
+  		crdshhdr.append(ncntry)
+  	}
+  	lfr = t.querySelector(".list-group")
+  	aa = ""
+  	for (xx of routs[x]){
+  		aa += lfr.innerHTML.formatUnicorn(xx)
+  	}
+  	lfr.innerHTML = aa
+
+	finalOutput +=t.innerHTML
+
+  }
+  console.log(values[0],values[1],routs)
   stopLoading()
   setdata2page(finalOutput)
+  document.querySelectorAll("div[country]").forEach(t=>{t.style.background="url(https://hatscripts.github.io/circle-flags/flags/"+t.getAttribute("country")+".svg)"});
 
 });
 }
@@ -216,7 +244,7 @@ const go2Page = (page,data)=>{
 						m.classList.remove("d-none");
 						li = ""
 						for (var i = 0; i < data.control.menu.length; i++) {
-							li += "<li><a class=dropdown-item role=button onclick="+data.control.menu[i].a+"(this)  tabindex=0>"+data.control.menu[i].t+"</a></li>"
+							li += "<li><a class=dropdown-item role=button onclick="+data.control.menu[i].a+"(this) tabindex=0>"+data.control.menu[i].t+"</a></li>"
 						}
 						m.parentNode.querySelector(".dropdown-menu").innerHTML = li
 
