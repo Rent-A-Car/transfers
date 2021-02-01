@@ -52,6 +52,7 @@ Promise.all([data, temp]).then((values) => {
   		routs[values[0][i].route].push(values[0][i])
   	}else{
   		routs[values[0][i].route]=[]
+  		routs[values[0][i].route].push(values[0][i])
   	}
   }
   for (x in routs){
