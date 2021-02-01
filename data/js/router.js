@@ -1,3 +1,32 @@
+String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
+function () {
+    "use strict";
+    var str = this.toString();
+    if (arguments.length) {
+        var t = typeof arguments[0];
+        var key;
+        var args = ("string" === t || "number" === t) ?
+            Array.prototype.slice.call(arguments)
+            : arguments[0];
+
+        for (key in args) {
+            str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+        }
+    }
+
+    return str;
+};
+const stopLoading=()=>{
+document.getElementById("pagedataloading").classList.add("d-none")
+}
+const startLoading=()=>{
+setdata2page("")
+document.getElementById("pagedataloading").classList.remove("d-none")
+}
+const setdata2page = (html)=>{
+	document.getElementById("page-container").innerHTML=html;
+}
+
 //   Render  functions
 
 const fetchCSV=(url)=>{
@@ -14,9 +43,15 @@ const fetchCSV=(url)=>{
 
 let rPagehome = ()=>{
 	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv")
-	temp="";
+	temp=fetch("/pages/home.html").then((r)=>{return r.text()})
+	finalOutput="";
 Promise.all([data, temp]).then((values) => {
-  console.log(values);
+  for (var i = 0; i < values[0].length; i++) {
+  	finalOutput += values[1].formatUnicorn(values[0][i])
+  }
+  stopLoading()
+  setdata2page(finalOutput)
+
 });
 }
 
@@ -63,7 +98,7 @@ const PAGEDATA={
 const PAGERENDER={
 	home:rPagehome,
 	drivers:()=>{
-		setTimeout (function() {document.getElementById("pagedataloading").classList.add("d-none");},3000);
+		setTimeout (stopLoading,3000);
 		
 	},
 	calendar:console.log
@@ -144,6 +179,7 @@ data = {
 const go2Page = (page,data)=>{
 	d = document;
 	console.log(page,data)
+	startLoading()
 	if(data){
 		(typeof data == "string")?data = PAGEDATA[data]:0;
 		if (data.control){	
@@ -180,7 +216,7 @@ const go2Page = (page,data)=>{
 						m.classList.remove("d-none");
 						li = ""
 						for (var i = 0; i < data.control.menu.length; i++) {
-							li += "<li><a class=dropdown-item role=button onclick="+data.control.menu[i].a.name+"(this)  tabindex=0>"+data.control.menu[i].t+"</a></li>"
+							li += "<li><a class=dropdown-item role=button onclick="+data.control.menu[i].a+"(this)  tabindex=0>"+data.control.menu[i].t+"</a></li>"
 						}
 						m.parentNode.querySelector(".dropdown-menu").innerHTML = li
 
@@ -207,6 +243,7 @@ const go2Page = (page,data)=>{
 			d.getElementById("pageName").innerText = data.control.title||""
 		}
 	}
+	console.log(data)
 	sessionStorage.setItem('pdata',JSON.stringify(data))
 	sessionStorage.setItem('page',page)
 	if (page in PAGERENDER){

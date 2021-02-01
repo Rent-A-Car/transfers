@@ -67,10 +67,10 @@ const beforeInstallPrompt = (event)=>{
 	event.userChoice.then((result)=>{
 		if(result.outcome=="accepted"){
 			console.log("install")
-			  var myWindow = window.open("?close", "_self");
-  				myWindow.document.write("");
-  				alert("Откройте приложение после установки на ваше устройство")
-  				setTimeout (function() {myWindow.close()},1000);
+			var myWindow = window.open("?close", "_self");
+  			myWindow.document.write("");
+  			confirm("Откройте приложение после установки на ваше устройство")?myWindow.close():myWindow.close();
+
 
 		}else{
 			console.log("noinstall")

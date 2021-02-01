@@ -68,7 +68,7 @@ if (navigator.connection){
 
 d.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
 d.getElementById("reloadnavbutton").addEventListener('click',()=>{
-	d.getElementById("pagedataloading").classList.remove("d-none")
+	startLoading();
 	page = sessionStorage.getItem('page')
 	data = sessionStorage.getItem('pdata')
 	if (page in PAGERENDER){
