@@ -253,6 +253,7 @@ const go2Page = (page,data)=>{
 					(cb=="s")?(()=>{
 						d.getElementById('searchnavbutton').classList.remove("d-none")
 					})():(()=>{
+						d.getElementById("searchclsbutton").click()
 						d.getElementById('searchnavbutton').classList.add("d-none")
 					})();
 					break;

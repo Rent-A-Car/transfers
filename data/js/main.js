@@ -76,6 +76,17 @@ d.getElementById("reloadnavbutton").addEventListener('click',()=>{
 		f(data)
 	}
 })
+const searchInBody = (text) => {
+  searchBody = d.querySelectorAll(".list-group-item").forEach((i) => {
+    if (i.innerText.toUpperCase().indexOf(text.toUpperCase()) > -1 || !text) {
+      i.style.display = "block";
+    } else {
+      i.style.display = "none";
+    }
+  });
+};
+
+
 d.getElementById("searchnavbutton").addEventListener('click',()=>{
 	d.getElementById("searchnavbutton").classList.add("d-none")
 	d.getElementById("searchclsbutton").classList.remove("d-none")
@@ -85,6 +96,8 @@ d.getElementById("searchclsbutton").addEventListener('click',()=>{
 	d.getElementById("searchnavbutton").classList.remove("d-none")
 	d.getElementById("searchclsbutton").classList.add("d-none")
 	d.getElementById("searchinput").classList.add("d-none")
+	d.querySelector("#searchinput input").value="";
+	searchInBody("")
 })
 
 function openSidebarNav() {
