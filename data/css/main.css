@@ -1,6 +1,6 @@
-/*!
+/*
   SIDEBAR
- */
+*/
 body{
   font-family: 'Roboto Slab', serif!important;
   font-display: swap;
@@ -37,9 +37,9 @@ text-align: center;
 transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-/*!
+/*
   SIDEBAR END
- */
+*/
 
 /* PAGE NAV */
 #navPages{
@@ -279,6 +279,9 @@ margin-right: 6.5px;
     margin-left: auto!important;
 }
 
+}
+[role=button] {
+    outline: none;
 }
 /*https://codepen.io/gornostay25/pen/RwoNOgx*/
 .flags-shema{padding:.3em;position:relative}.flags-shema div{width:1.6em;height:1.6em;border-radius:50%;z-index:2}.flags-shema div:after{content:attr(country);margin-left:0;margin-top:1.4em;display:inline-block;text-transform:uppercase}.flags-shema .line{position:absolute;display:block;top:0;bottom:0;left:.3em;right:.3em;margin:auto;background:#807e78;height:.3em;z-index:1}
