@@ -1,10 +1,11 @@
-const Static_CACHE_Version = '21-02-02'
+const Static_CACHE_Version = '21-02-02-1'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
     '/',
     '/offline.html',
     '/pages/home.html',
+    '/pages/route-info.html',
     //css
     '/css/main.css',
     '/css/iconsfont.css',
