@@ -90,6 +90,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user && window.localStorage.getItem("auth")) {
     loginModal.hide()
     firebase.auth().currentUser = user;
+    document.getElementById("emailDispl").innerText = user.email;
     go2Page(...curPage())
   } else {
   	loginModal.show()

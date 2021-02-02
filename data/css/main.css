@@ -280,7 +280,7 @@ margin-right: 6.5px;
 }
 
 }
-[role=button] {
+[role=button], [type=button], button {
     outline: none;
 }
 /*https://codepen.io/gornostay25/pen/RwoNOgx*/

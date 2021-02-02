@@ -4,6 +4,7 @@ const Static_CACHEAssets = [
 	//html
     '/',
     '/offline.html',
+    '/pages/home.html',
     //css
     '/css/main.css',
     '/css/iconsfont.css',
