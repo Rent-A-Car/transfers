@@ -58,6 +58,7 @@ Promise.all([data, temp]).then((values) => {
   for (x in routs){
   	r = x.split(";");
   	t = values[1].cloneNode(!0)
+
   	crdshhdr = t.querySelector(".flags-shema")
   	cntry = crdshhdr.querySelector("div")
   	cntry.setAttribute("country",r[0])
@@ -66,12 +67,19 @@ Promise.all([data, temp]).then((values) => {
   		ncntry.setAttribute("country",r[i])
   		crdshhdr.append(ncntry)
   	}
+
   	lfr = t.querySelector(".list-group")
-  	aa = ""
-  	for (xx of routs[x]){
-  		aa += lfr.innerHTML.formatUnicorn(xx)
+  	a=lfr.firstElementChild
+  	nwa=a.cloneNode(!0)
+  	a.innerHTML=a.innerHTML.formatUnicorn(routs[x][0])
+  	a.setAttribute("onclick","go2Page(\"routedetails\",{control:{title:\""+routs[x][0].drivern+"\",top:\"bnn\",nav:\"h\"}})")
+  	for (var i = 1; i < routs[x].length; i++) {
+  		tnwa=nwa.cloneNode(!0)
+  		tnwa.innerHTML=nwa.innerHTML.formatUnicorn(routs[x][i])
+  		tnwa.setAttribute("onclick","go2Page(go2Page(\"routedetails\",{control:{title:\""+routs[x][i].drivern+"\",top:\"bnn\",nav:\"h\"}}))")
+  		lfr.append(tnwa)
   	}
-  	lfr.innerHTML = aa
+  	
 
 	finalOutput +=t.outerHTML
 
@@ -130,7 +138,8 @@ const PAGERENDER={
 		setTimeout (stopLoading,3000);
 		
 	},
-	calendar:console.log
+	calendar:console.log,
+	routedetails:console.log
 
 }
 
