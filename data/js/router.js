@@ -73,7 +73,7 @@ Promise.all([data, temp]).then((values) => {
   	}
   	lfr.innerHTML = aa
 
-	finalOutput +=t.innerHTML
+	finalOutput +=t.outerHTML
 
   }
   console.log(values[0],values[1],routs)
