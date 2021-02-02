@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-02-02-1'
+const Static_CACHE_Version = '21-02-02-2'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -37,7 +37,14 @@ const DCACHE= 'cache-auto';
 const NoCACHEHosts=[
 	"apis.google.com",
 	"www.googleapis.com",
-	"securetoken.googleapis.com"
+	"securetoken.googleapis.com",
+	"pagead2.googlesyndication.com",
+	"www.googletagservices.com",
+	"adservice.google.com",
+	"partner.googleadservices.com",
+	"tpc.googlesyndication.com",
+	"googleads.g.doubleclick.net",
+	"adservice.google.me"
 ]
 
 const NoCACHEPaths=[
@@ -145,9 +152,10 @@ async function checkOnline(req) {
 
         let isBanedHost =NoCACHEHosts.includes(Rurl.hostname),
         isBanedPath = (NoCACHEHosts.filter((i,ii,iii,m=Rurl.pathname)=>{return m.match(i)}).length>0)
-
+        console.log(Rurl.hostname)
         if(!isBanedHost && !isBanedPath) {
          await cache.put(req, res.clone());
+         console.log("CACHED")
         }else{
         	console.log("noCACHED")
         }

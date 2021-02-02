@@ -76,7 +76,16 @@ d.getElementById("reloadnavbutton").addEventListener('click',()=>{
 		f(data)
 	}
 })
-
+d.getElementById("searchnavbutton").addEventListener('click',()=>{
+	d.getElementById("searchnavbutton").classList.add("d-none")
+	d.getElementById("searchclsbutton").classList.remove("d-none")
+	d.getElementById("searchinput").classList.remove("d-none")
+})
+d.getElementById("searchclsbutton").addEventListener('click',()=>{
+	d.getElementById("searchnavbutton").classList.remove("d-none")
+	d.getElementById("searchclsbutton").classList.add("d-none")
+	d.getElementById("searchinput").classList.add("d-none")
+})
 
 function openSidebarNav() {
 d=document;

@@ -110,18 +110,20 @@ const PAGEDATA={
 			navTab:"2"
 		}
 
-	}
-	/*,drivers:{
+	},"add-driver":{
 		control:{
-			title:"Сергей Шавела",
-			top:"bnm",
-			nav:"h",
-			menu:[
-				
-			]
-		}
+			title:"Добавить перевозчика",
+			top:"bnn",
+			nav:"h"
+			
+		},
+		back:{
+				page:"home",
+				data:"home"
 
-	}*/,
+			}
+
+	},
 	calendar:{
 		control:{
 			title:"Календарь",
@@ -136,17 +138,23 @@ const PAGERENDER={
 	home:rPagehome,
 	drivers:()=>{
 		setTimeout (stopLoading,3000);
-		
 	},
 	calendar:console.log,
-	routedetails:console.log
+	routedetails:console.log,
+	"add-driver":console.log,
 
 }
-
+window.onpopstate = (e)=>{
+	if(e.state){
+		console.log("ONPOPSTATE",e.state)
+		go2Page(...e.state)	
+	}
+}
 const curPage = ()=>{
+	console.log("curpage")
 	let ourl = new URL(window.location.href)
 	
-	page =""
+	let page =""
 	if ("page" in sessionStorage){
 		page = sessionStorage.getItem('page')
 	}else if(ourl.searchParams.has("p")){
@@ -216,7 +224,7 @@ data = {
 
 const go2Page = (page,data)=>{
 	d = document;
-	console.log(page,data)
+	console.log(page,data)	
 	startLoading()
 	if(data){
 		(typeof data == "string")?data = PAGEDATA[data]:0;
@@ -284,6 +292,12 @@ const go2Page = (page,data)=>{
 	console.log(data)
 	sessionStorage.setItem('pdata',JSON.stringify(data))
 	sessionStorage.setItem('page',page)
+	if (data.back){
+		history.pushState([data.back.page,data.back.data], page, "#"+page)
+		history.pushState(null, page, "#f"+page)
+	}else{
+		history.pushState(null, page, "#")	
+	}
 	if (page in PAGERENDER){
 		f = PAGERENDER[page]
 		f(data)
