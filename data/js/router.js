@@ -17,17 +17,27 @@ function () {
     return str;
 };
 const stopLoading=()=>{
-document.getElementById("pagedataloading").classList.add("d-none")
+d.getElementById("pagedataloading").classList.add("d-none")
 }
 const startLoading=()=>{
 setdata2page("")
-document.getElementById("pagedataloading").classList.remove("d-none")
+d.getElementById("pagedataloading").classList.remove("d-none")
 }
 const setdata2page = (html)=>{
-	document.getElementById("page-container").innerHTML=html;
+	d.getElementById("page-container").innerHTML=html;
 }
+function searchInRoute (text) {
+  searchBody = d.querySelectorAll(".list-group-item").forEach((i) => {
+    if (i.innerText.toUpperCase().indexOf(text.toUpperCase()) > -1 || !text) {
+      i.style.display = "block";
+    } else {
+      i.style.display = "none";
+    }
+  });
+};
 
 //   Render  functions
+
 
 const fetchCSV=(url)=>{
 	return new Promise((resolve, reject)=>{
@@ -87,7 +97,7 @@ Promise.all([data, temp]).then((values) => {
   console.log(values[0],values[1],routs)
   stopLoading()
   setdata2page(finalOutput)
-  document.querySelectorAll("div[country]").forEach(t=>{t.style.background="url(https://hatscripts.github.io/circle-flags/flags/"+t.getAttribute("country")+".svg)"});
+  d.querySelectorAll("div[country]").forEach(t=>{t.style.background="url(https://hatscripts.github.io/circle-flags/flags/"+t.getAttribute("country")+".svg)"});
 
 });
 }
@@ -99,7 +109,7 @@ const PAGEDATA={
 			title:"Рейсы",
 			top:"msn",
 			nav:"s",
-			navTab:"1"
+			navTab:"1",
 		}
 	},
 	drivers:{
@@ -107,7 +117,7 @@ const PAGEDATA={
 			title:"Водители",
 			top:"msn",
 			nav:"s",
-			navTab:"2"
+			navTab:"2",
 		}
 
 	},"add-driver":{
@@ -142,6 +152,10 @@ const PAGERENDER={
 	calendar:console.log,
 	routedetails:console.log,
 	"add-driver":console.log,
+}
+const PAGESEARCH={
+	home:"searchInRoute",
+	drivers:"console.log"
 
 }
 window.onpopstate = (e)=>{
@@ -223,7 +237,7 @@ data = {
 */
 
 const go2Page = (page,data)=>{
-	d = document;
+	d = d;
 	console.log(page,data)	
 	startLoading()
 	if(data){
@@ -252,6 +266,8 @@ const go2Page = (page,data)=>{
 					case 1:
 					(cb=="s")?(()=>{
 						d.getElementById('searchnavbutton').classList.remove("d-none")
+						d.querySelector("#searchinput input").setAttribute("onclick",data.control.search+"(this.value)")
+						d.getElementById("searchclsbutton").click()
 					})():(()=>{
 						d.getElementById("searchclsbutton").click()
 						d.getElementById('searchnavbutton').classList.add("d-none")
@@ -263,7 +279,7 @@ const go2Page = (page,data)=>{
 						m.classList.remove("d-none");
 						li = ""
 						for (var i = 0; i < data.control.menu.length; i++) {
-							li += "<li><a class=dropdown-item role=button onclick="+data.control.menu[i].a+"(this) tabindex=0>"+data.control.menu[i].t+"</a></li>"
+							li += "<li><a class=dropdown-item role=button onclick="+PAGESEARCH[page]+"(this) tabindex=0>"+data.control.menu[i].t+"</a></li>"
 						}
 						m.parentNode.querySelector(".dropdown-menu").innerHTML = li
 
