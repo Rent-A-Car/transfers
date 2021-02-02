@@ -140,14 +140,27 @@ async function checkCache(req) {
 		return await fetch(req);
 	}
 }
+function timeout(delay) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve(new Response('', {
+                status: 408,
+                statusText: 'Request timed out.'
+            }));
+        }, delay);
+    });
+}
 async function checkOnline(req) {
     const cache = await caches.open(DCACHE);
     try {
     	let Rurl = new URL(req.url);
-        const res = await fetch(req);
+        const res = await Promise.race([timeout(3000), fetch(req)]);
         console.log("fetch to",req.url)
+
         if(!navigator.onLine){
         	throw "Offline"
+        }else if(res.status == 408){
+        	throw "Timeout"
         }
 
         let isBanedHost =NoCACHEHosts.includes(Rurl.hostname),
