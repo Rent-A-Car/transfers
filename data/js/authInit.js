@@ -75,7 +75,7 @@ firebase.auth().signOut().then(() => {
   // Sign-out successful.
   document.getElementById("errorLogin").classList.add("d-none")
   console.log("ok logout")
-  window.localStorage.setItem("auth",false);
+  window.localStorage.setItem("auth",!1);
 }).catch((error) => {
   // An error happened.
   alert(error)

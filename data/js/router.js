@@ -51,10 +51,38 @@ const fetchCSV=(url)=>{
 	});
 }
 
+let Oroutedetails=(x,i)=>{
+	fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv").then((data)=>{
+	let routs ={}
+	for (var ii = 0; ii < data.length; ii++) {
+  	if(data[ii].route in routs){
+  		routs[data[ii].route].push(data[ii])
+  	}else{
+  		routs[data[ii].route]=[]
+  		routs[data[ii].route].push(data[ii])
+  	}
+  }
+ go2Page("routedetails",{control:{title:routs[x][i].drivern+" ("+routs[x][i].date+")",top:"bnn",nav:"h"},data:routs[x][i]})
+	
+	})
+}
+
+let shareRoute = (id,btn)=>{
+	if (navigator.share) {
+  navigator.share(
+    {
+      title: "Test",
+      url: "htpps://arendacg.space/?id"+id
+    }
+  );
+}
+btn.parentElement.parentElement.scrollBy({left: -1,behavior:"smooth"})
+}
+
 let rPagehome = ()=>{
 	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv")
 	temp=fetch("/pages/home.html").then((r)=>{return r.text()}).then((r)=>{return new DOMParser().parseFromString(r,"text/html").querySelector("[template]")})
-	routs={}
+	let routs={}
 	finalOutput=""
 Promise.all([data, temp]).then((values) => {
   for (var i = 0; i < values[0].length; i++) {
@@ -68,7 +96,6 @@ Promise.all([data, temp]).then((values) => {
   for (x in routs){
   	r = x.split(";");
   	t = values[1].cloneNode(!0)
-
   	crdshhdr = t.querySelector(".flags-shema")
   	cntry = crdshhdr.querySelector("div")
   	cntry.setAttribute("country",r[0])
@@ -82,11 +109,16 @@ Promise.all([data, temp]).then((values) => {
   	a=lfr.firstElementChild
   	nwa=a.cloneNode(!0)
   	a.innerHTML=a.innerHTML.formatUnicorn(routs[x][0])
-  	a.setAttribute("onclick","go2Page(\"routedetails\",{control:{title:\""+routs[x][0].drivern+"\",top:\"bnn\",nav:\"h\"}})")
+  	id = routs[x][0].driveru+"-"+routs[x][0].date.replaceAll(".","")+"-"+routs[x][0].route.replaceAll(";","-")
+  	a.firstElementChild.setAttribute("onclick","Oroutedetails(\""+x+"\",0)")
+  	a.querySelector(".slidemenu .share").setAttribute("onclick","shareRoute(\""+id+"\",this)")
+
   	for (var i = 1; i < routs[x].length; i++) {
   		tnwa=nwa.cloneNode(!0)
+  		id = routs[x][i].driveru+"-"+routs[x][i].date.replaceAll(".","")+"-"+routs[x][i].route.replaceAll(";","-")
   		tnwa.innerHTML=nwa.innerHTML.formatUnicorn(routs[x][i])
-  		tnwa.setAttribute("onclick","go2Page(go2Page(\"routedetails\",{control:{title:\""+routs[x][i].drivern+"\",top:\"bnn\",nav:\"h\"}}))")
+  		tnwa.firstElementChild.setAttribute("onclick","Oroutedetails(\""+x+"\","+i+")")
+  		tnwa.querySelector(".slidemenu .share").setAttribute("onclick","shareRoute(\""+id+"\",this)")
   		lfr.append(tnwa)
   	}
   	
@@ -98,7 +130,6 @@ Promise.all([data, temp]).then((values) => {
   stopLoading()
   setdata2page(finalOutput)
   d.querySelectorAll("div[country]").forEach(t=>{t.style.background="url(https://hatscripts.github.io/circle-flags/flags/"+t.getAttribute("country")+".svg)"});
-
 });
 }
 
