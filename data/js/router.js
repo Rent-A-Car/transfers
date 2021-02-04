@@ -19,8 +19,8 @@ function () {
 const stopLoading=()=>{
 d.getElementById("pagedataloading").classList.add("d-none")
 }
-const startLoading=()=>{
-setdata2page("")
+const startLoading=(nodel)=>{
+(nodel)?0:setdata2page("")
 d.getElementById("pagedataloading").classList.remove("d-none")
 }
 const setdata2page = (html)=>{
@@ -29,9 +29,9 @@ const setdata2page = (html)=>{
 function searchInRoute (text) {
   searchBody = d.querySelectorAll(".list-group-item").forEach((i) => {
     if (i.innerText.toUpperCase().indexOf(text.toUpperCase()) > -1 || !text) {
-      i.style.display = "block";
+      i.parentNode.style.display = "flex";
     } else {
-      i.style.display = "none";
+      i.parentNode.style.display = "none";
     }
   });
 };
@@ -52,6 +52,7 @@ const fetchCSV=(url)=>{
 }
 
 let Oroutedetails=(x,i)=>{
+	go2Page("blank",{control:{title:"",top:"bnn",nav:"h"}})
 	fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv").then((data)=>{
 	let routs ={}
 	for (var ii = 0; ii < data.length; ii++) {
@@ -72,7 +73,7 @@ let shareRoute = (id,btn)=>{
   navigator.share(
     {
       title: "Test",
-      url: "htpps://arendacg.space/?id"+id
+      url: "https://arendacg.space/?id"+id
     }
   );
 }
@@ -182,7 +183,8 @@ const PAGERENDER={
 	},
 	calendar:console.log,
 	routedetails:console.log,
-	"add-driver":console.log,
+	"add-driver":console.log
+
 }
 const PAGESEARCH={
 	home:"searchInRoute",
@@ -338,9 +340,12 @@ const go2Page = (page,data)=>{
 		}
 	}
 	console.log(data)
+	if (page != "blank"){
 	sessionStorage.setItem('pdata',JSON.stringify(data))
-	sessionStorage.setItem('page',page)
-	if (data.back){
+	sessionStorage.setItem('page',page)	
+	}
+	
+	if (data.back && page != "blank"){
 		history.pushState([data.back.page,data.back.data], page, "#"+page)
 		history.pushState(null, page, "#f"+page)
 	}else{
