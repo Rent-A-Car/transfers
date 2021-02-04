@@ -134,6 +134,23 @@ Promise.all([data, temp]).then((values) => {
 });
 }
 
+let rPagedrivers = ()=>{
+	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=0&single=true&output=csv&range=B:E")
+	temp=fetch("/pages/drivers.html").then((r)=>{return r.text()}).then((r)=>{return new DOMParser().parseFromString(r,"text/html").querySelector("[template]")})
+	let finalOutput=""
+	Promise.all([data, temp]).then((values) => {
+		//let t = values[1].cloneNode(!0)
+		finalOutput = values[1].firstElementChild.outerHTML
+		for (driver of values[0]){
+			console.log(driver)
+		}
+		
+		stopLoading()
+		setdata2page(finalOutput)
+	})
+	
+}
+
 //end of render functions
 const PAGEDATA={
 	home:{
@@ -178,9 +195,7 @@ const PAGEDATA={
 
 const PAGERENDER={
 	home:rPagehome,
-	drivers:()=>{
-		setTimeout (stopLoading,3000);
-	},
+	drivers:rPagedrivers,
 	calendar:console.log,
 	routedetails:console.log,
 	"add-driver":console.log
@@ -299,7 +314,7 @@ const go2Page = (page,data)=>{
 					case 1:
 					(cb=="s")?(()=>{
 						d.getElementById('searchnavbutton').classList.remove("d-none")
-						d.querySelector("#searchinput input").setAttribute("onclick",data.control.search+"(this.value)")
+						d.querySelector("#searchinput input").setAttribute("onclick",PAGESEARCH[page]+"(this.value)")
 						d.getElementById("searchclsbutton").click()
 					})():(()=>{
 						d.getElementById("searchclsbutton").click()
@@ -312,7 +327,7 @@ const go2Page = (page,data)=>{
 						m.classList.remove("d-none");
 						li = ""
 						for (var i = 0; i < data.control.menu.length; i++) {
-							li += "<li><a class=dropdown-item role=button onclick="+PAGESEARCH[page]+"(this) tabindex=0>"+data.control.menu[i].t+"</a></li>"
+							li += "<li><a class=dropdown-item role=button onclick="+data.control.menu[i].a+"(this) tabindex=0>"+data.control.menu[i].t+"</a></li>"
 						}
 						m.parentNode.querySelector(".dropdown-menu").innerHTML = li
 
