@@ -325,8 +325,19 @@ margin-right: 6.5px;
   height: 55px;
   margin: 0;
   padding: 0;
-  text-align: center;
   width: 55px;
   bottom: 75px;
   right: 18px;
+  z-index: 2;
+}
+
+.drivericon{
+  width: 2.8125em;
+}
+.driverdata{
+  overflow: hidden;
+}
+.driverdata .uname{
+  font-size: 12px;
+  max-height: 40px;
 }

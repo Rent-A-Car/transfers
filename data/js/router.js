@@ -143,6 +143,7 @@ let rPagedrivers = ()=>{
 		finalOutput = values[1].firstElementChild.outerHTML
 		for (driver of values[0]){
 			console.log(driver)
+			finalOutput += values[1].lastElementChild.outerHTML.formatUnicorn(driver)
 		}
 		
 		stopLoading()

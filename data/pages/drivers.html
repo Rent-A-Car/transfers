@@ -1,23 +1,18 @@
 <div template>
-<span class="add-button position-fixed d-flex justify-content-center align-items-center" tabindex="0" role="button" onclick='go2Page("add-driver","add-driver")'>
-	<i class="icon-plus"></i>
-</span>
-<div class="card card-body mt-1">
-	<div class=list-group>
-		<div class="havemenu">
-  			<a role=button tabindex=0 class="list-group-item list-group-item-action flex-column align-items-start">
-    			<div class="d-flex w-100 justify-content-between">
-      				<h5 class="mb-1 drivername">{drivern}</h5>
-      				<small class=text-muted>{date}</small>
-    			</div>
-    			<p class=mb-1>{comment}</p>
-    			<small class=text-muted>@{driveru}</small>
-  			</a>
-  			<div class="slidemenu d-flex justify-content-around">
-  				<button class="btn btn-outline-primary m-1 my-2 flex-grow-0 share">Поделиться</button>
-  				<button class="btn btn-outline-success m-1 my-2 flex-grow-1" onclick='this.parentElement.parentElement.scrollBy({left: -1,behavior:"smooth"})'>Добавить в календарь</button>
-  			</div>
+	<span class="add-button position-fixed d-flex justify-content-center align-items-center" tabindex="0" role="button" onclick='go2Page("add-driver","add-driver")'>
+		<i class="icon-plus"></i>
+	</span>
+	<div class="card card-body mt-1 d-flex flex-row align-items-center">
+		<div class="drivericon">
+			<img src={photo} alt="{name}" class="w-100 rounded-circle">
 		</div>
-</div>
-</div>
+		<div class="driverdata d-flex flex-column ms-2">
+			<span class=name>{name}</span>
+			<smal class="uname text-muted">@{username}</smal>
+			
+		</div>
+		<div class="driveraction">
+			
+		</div>
+	</div>
 </div>
