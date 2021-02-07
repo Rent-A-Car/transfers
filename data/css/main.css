@@ -341,3 +341,6 @@ margin-right: 6.5px;
   font-size: 12px;
   max-height: 40px;
 }
+.driveraction > div > i:hover{
+  background-color: rgba(0, 0, 0, 0.04);
+}

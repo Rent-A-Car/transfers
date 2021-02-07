@@ -135,7 +135,7 @@ Promise.all([data, temp]).then((values) => {
 }
 
 let rPagedrivers = ()=>{
-	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=0&single=true&output=csv&range=B:E")
+	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=0&single=true&output=csv&range=B:F")
 	temp=fetch("/pages/drivers.html").then((r)=>{return r.text()}).then((r)=>{return new DOMParser().parseFromString(r,"text/html").querySelector("[template]")})
 	let finalOutput=""
 	Promise.all([data, temp]).then((values) => {
