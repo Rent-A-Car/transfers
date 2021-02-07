@@ -133,6 +133,16 @@ d=document;
   
 }
 
+const API = (()=>{
+	let apiurl = "https://script.google.com/macros/s/AKfycbz6fGzgSxLaCwhjcvvxFTcWRJHV5jKXyFvS0KljbUbjtW9CGKjY6-j8/exec",
+	getToken = ()=>{return (firebase.auth().currentUser)?firebase.auth().currentUser.ya:!1},
+
+	API={
+		getlikes: (s)=>(console.log(apiurl,getToken()))
+	};
+	return API
+})();
+
 //navigator.connection.onchange = ()=>{console.log(navigator.onLine)}
 
 //new Hammer(document.getElementById("navPages")).get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL}).manager.on("swipe",(e)=>{(e.direction == 2)?document.getElementById("page-container").append("left"):document.getElementById("page-container").append("right")})
