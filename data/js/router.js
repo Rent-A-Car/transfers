@@ -16,6 +16,7 @@ function () {
 
     return str;
 };
+const DBURL="https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub"
 const stopLoading=()=>{
 d.getElementById("pagedataloading").classList.add("d-none")
 }
@@ -53,7 +54,7 @@ const fetchCSV=(url)=>{
 
 let Oroutedetails=(x,i)=>{
 	go2Page("blank",{control:{title:"",top:"bnn",nav:"h"}})
-	fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv").then((data)=>{
+	fetchCSV(DBURL+"?gid=1463143925&single=true&output=csv").then((data)=>{
 	let routs ={}
 	for (var ii = 0; ii < data.length; ii++) {
   	if(data[ii].route in routs){
@@ -81,7 +82,7 @@ btn.parentElement.parentElement.scrollBy({left: -1,behavior:"smooth"})
 }
 
 let rPagehome = ()=>{
-	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=1463143925&single=true&output=csv")
+	data=fetchCSV(DBURL+"?gid=1463143925&single=true&output=csv")
 	temp=fetch("/pages/home.html").then((r)=>{return r.text()}).then((r)=>{return new DOMParser().parseFromString(r,"text/html").querySelector("[template]")})
 	let routs={}
 	finalOutput=""
@@ -135,7 +136,7 @@ Promise.all([data, temp]).then((values) => {
 }
 
 let rPagedrivers = ()=>{
-	data=fetchCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wIl60L4xRJVpzHC0Cz8ccuSID3s28OtcIUXGvGPBk08y8XowkSBkE7VfFEiegdCa/pub?gid=0&single=true&output=csv&range=B:F")
+	data=fetchCSV(DBURL+"?gid=0&single=true&output=csv&range=B:F")
 	temp=fetch("/pages/drivers.html").then((r)=>{return r.text()}).then((r)=>{return new DOMParser().parseFromString(r,"text/html").querySelector("[template]")})
 	let finalOutput=""
 	Promise.all([data, temp]).then((values) => {
