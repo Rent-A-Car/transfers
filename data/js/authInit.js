@@ -43,6 +43,16 @@ firebase.auth()
   	storage.setItem("token",result.credential.accessToken.split("").reverse().join(""))
   	storage.setItem("auth",true)
   	//go to server
+  	if (result.additionalUserInfo.isNewUser){
+  		API.signUp(result.credential.accessToken).then((a)=>{
+  			console.log("signup",a)
+		})
+  	}else{
+  		API.loginIn(result.credential.accessToken).then((a)=>{
+  			console.log("loginIn",a)
+		})
+  	}
+  	
 
 
     firebase.auth().currentUser = result.user;

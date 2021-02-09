@@ -135,10 +135,40 @@ d=document;
 
 const API = (()=>{
 	let apiurl = "https://script.google.com/macros/s/AKfycbz6fGzgSxLaCwhjcvvxFTcWRJHV5jKXyFvS0KljbUbjtW9CGKjY6-j8/exec",
-	getToken = ()=>{return (firebase.auth().currentUser)?firebase.auth().currentUser.ya:!1},
+	getToken = ()=>{return new Promise((s,e)=>{firebase.auth().currentUser.getIdToken().then(s,e)})},
+	get =(params)=>{
+		console.log(params,"get")
+	},
+	post = (params)=>{
+		return getToken()
+		.then(
+			(token)=>{
+				let url = new URL(apiurl) 
+				if(params){url.search = new URLSearchParams(params).toString()}
 
+				let req = new Request(url.toString(),{
+					method: 'POST',
+					body:token
+				});
+				console.log(req)
+				return fetch(req).then((r)=>{return r.json()}).then((r)=>{return r})
+		})
+		//return fetch(apiurl,{method:"post",body:}).then((r)=>{return r.json()}).then((r)=>{return r})
+	},
 	API={
-		getlikes: (s)=>(console.log(apiurl,getToken()))
+		signUp: (token)=>{
+			return post({a:"signup",atk:token})
+
+		},
+		loginIn: (token)=>{
+			return post({a:"login",atk:token})
+		},
+		like:(user)=>{
+
+		},
+		dislike:(user)=>{
+
+		},
 	};
 	return API
 })();
