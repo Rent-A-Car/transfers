@@ -74,7 +74,7 @@ let shareRoute = (id,btn)=>{
   navigator.share(
     {
       title: "Test",
-      url: "https://arendacg.space/?id"+id
+      url: "https://transfers.arendacg.space/?id"+id
     }
   );
 }
@@ -114,6 +114,13 @@ Promise.all([data, temp]).then((values) => {
   	id = routs[x][0].driveru+"-"+routs[x][0].date.replaceAll(".","")+"-"+routs[x][0].route.replaceAll(";","-")
   	a.firstElementChild.setAttribute("onclick","Oroutedetails(\""+x+"\",0)")
   	a.querySelector(".slidemenu .share").setAttribute("onclick","shareRoute(\""+id+"\",this)")
+  	a.querySelectorAll("i.Ttype").forEach((e,c)=>{
+  			if(routs[x][0].type * 1 == c+1 || routs[x][0].type * 1 == 3){
+  				e.classList.remove("d-none")
+  			}else{
+  				e.classList.add("d-none")
+  			}
+  		})
 
   	for (var i = 1; i < routs[x].length; i++) {
   		tnwa=nwa.cloneNode(!0)
@@ -121,6 +128,13 @@ Promise.all([data, temp]).then((values) => {
   		tnwa.innerHTML=nwa.innerHTML.formatUnicorn(routs[x][i])
   		tnwa.firstElementChild.setAttribute("onclick","Oroutedetails(\""+x+"\","+i+")")
   		tnwa.querySelector(".slidemenu .share").setAttribute("onclick","shareRoute(\""+id+"\",this)")
+  		tnwa.querySelectorAll("i.Ttype").forEach((e,c)=>{
+  			if(routs[x][i].type * 1 == c+1 || routs[x][i].type * 1 == 3){
+  				e.classList.remove("d-none")
+  			}else{
+  				e.classList.add("d-none")
+  			}
+  		})
   		lfr.append(tnwa)
   	}
   	
