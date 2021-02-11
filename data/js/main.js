@@ -164,10 +164,10 @@ const API = (()=>{
 			return post({a:"login",atk:token})
 		},
 		like:(user)=>{
-
+			return post({a:"like",drv:user})
 		},
 		dislike:(user)=>{
-
+			return post({a:"dislike",drv:user})
 		},
 	};
 	return API

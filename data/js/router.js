@@ -74,7 +74,7 @@ let shareRoute = (id,btn)=>{
   navigator.share(
     {
       title: "Test",
-      url: "https://transfers.arendacg.space/?id"+id
+      url: "https://transfers.arendacg.space/?id="+id
     }
   );
 }
@@ -97,6 +97,7 @@ Promise.all([data, temp]).then((values) => {
   }
   for (x in routs){
   	r = x.split(";");
+  	console.log("cities",rc)
   	t = values[1].cloneNode(!0)
   	crdshhdr = t.querySelector(".flags-shema")
   	cntry = crdshhdr.querySelector("div")
@@ -157,7 +158,7 @@ let rPagedrivers = ()=>{
 		//let t = values[1].cloneNode(!0)
 		finalOutput = values[1].firstElementChild.outerHTML
 		for (driver of values[0]){
-			console.log(driver)
+			//console.log(driver)
 			finalOutput += values[1].lastElementChild.outerHTML.formatUnicorn(driver)
 		}
 		
@@ -222,6 +223,8 @@ const PAGESEARCH={
 	drivers:"console.log"
 
 }
+
+
 window.onpopstate = (e)=>{
 	if(e.state){
 		console.log("ONPOPSTATE",e.state)
@@ -301,7 +304,7 @@ data = {
 */
 
 const go2Page = (page,data)=>{
-	d = d;
+	//d = d;
 	console.log(page,data)	
 	startLoading()
 	if(data){
