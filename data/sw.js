@@ -1,4 +1,4 @@
-const Static_CACHE_Version = '21-02-02-2'
+const Static_CACHE_Version = '21-02-11'
 const Static_CACHE= 'static-'+Static_CACHE_Version
 const Static_CACHEAssets = [
 	//html
@@ -56,6 +56,8 @@ const NoCACHEPaths=[
 
 
 self.addEventListener('install', async event => {
+	self.skipWaiting();
+
     const cache = await caches.open(Static_CACHE);
     let ec = 0
     for (var i = 0; i < 5; i++) {
@@ -137,7 +139,7 @@ async function checkCache(req) {
 		return StaticCachedResponse || checkOnline((nreq)?nreq:req);
 
 	}else{
-		return await fetch(req);
+		return await Promise.race([timeout(4600), fetch(req)]);
 	}
 }
 function timeout(delay) {

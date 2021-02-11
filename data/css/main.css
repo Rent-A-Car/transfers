@@ -129,9 +129,28 @@ margin-right: 6.5px;
     from {opacity: 0}
     to {opacity: 1}
 }
-@-webkit-keyframes fadeIn {
-    from {opacity: 0 }
-    to   {opacity: 1 }
+
+
+@keyframes backInUp{
+0%{
+transform:translateX(-50%) translateY(1200px) scale(.8);
+opacity:.8
+}
+80%{
+transform:translateX(-50%) translateY(0) scale(.8);
+opacity:.8
+}
+to{
+transform:translateX(-50%) scale(1);
+opacity:1
+}
+}
+
+@keyframes fadeOutDown{
+0%{opacity:1}
+to{
+opacity:0;transform:translate3d(-50%,100%,0)
+}
 }
 
 .sign-in-title{

@@ -9,16 +9,10 @@ window.addEventListener('load', () => {
 
         navigator.serviceWorker.register('./sw.js')
             .then(registration => {
-            	registration.update()
-                if(registration.waiting){
-                	if(navigator.onLine){
-                		registration.unregister().then((urs)=>{
-                			window.location.reload();
-                		}).catch((e)=>{
-                			window.console.log(e)
-                		})
-                	}
-                }
+            	registration.onupdatefound = (e)=>{
+debugger
+            		window.location.reload()
+            	}
                 console.log('Service worker successfully registered');
             })
             .catch(error => {
@@ -41,22 +35,22 @@ window.addEventListener('load', () => {
 Swiper(d.getElementById("sidenav"),closeSidebarNav,4)
 //Swiper(d.getElementById("navControl"),openSidebarNav,2)
 
-function b64EncodeUnicode(str) {
-    // first we use encodeURIComponent to get percent-encoded UTF-8,
-    // then we convert the percent encodings into raw bytes which
-    // can be fed into btoa.
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-        function toSolidBytes(match, p1) {
-            return String.fromCharCode('0x' + p1);
-    }));
-}
+// function b64EncodeUnicode(str) {
+//     // first we use encodeURIComponent to get percent-encoded UTF-8,
+//     // then we convert the percent encodings into raw bytes which
+//     // can be fed into btoa.
+//     return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+//         function toSolidBytes(match, p1) {
+//             return String.fromCharCode('0x' + p1);
+//     }));
+// }
 
-function b64DecodeUnicode(str) {
-    // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
+// function b64DecodeUnicode(str) {
+//     // Going backwards: from bytestream, to percent-encoding, to original string.
+//     return decodeURIComponent(atob(str).split('').map(function(c) {
+//         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+//     }).join(''));
+// }
 
 const DetectConection=()=>{
 	if(navigator.onLine){
@@ -131,6 +125,25 @@ d=document;
   d.getElementById("SidebarOpasity").style.opacity = "0.5"; 
   d.getElementById("SidebarOpasity").style.width = "0px";
   
+}
+
+function ShowToastMessage(message="",type="primary",delay=1300){
+	return new Promise((rs,rj)=>{
+		let tm = d.createElement("div")
+		tm.style="bottom:12%;left:50%;transform:translateX(-50%);z-index:2;position:fixed"
+
+		tm.innerHTML='<div class="alert alert-'+type+'" role=alert style="padding:.4em 1em;border-radius:30px">'+message+'</div>'
+		d.body.append(tm)
+		tm.style.animation = "backInUp 1s both"
+		setTimeout(()=>{
+			tm.style.animation = "fadeOutDown 1s both"
+			setTimeout(()=>{
+				tm.remove()
+				rs()
+			},1000)
+
+		},delay+1000)
+	})
 }
 
 const API = (()=>{
