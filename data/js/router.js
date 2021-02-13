@@ -104,6 +104,38 @@ let shareRoute = (id, btn) => {
   })
 }
 
+
+let driverLiker = {
+	lock:false,
+	LikeDriver: btn=>{
+		user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
+		if(driverLiker.lock){
+			return !1
+		}
+		driverLiker.lock=true
+		API.like(user).then(driverLiker.rDriversLike).then(()=>{driverLiker.lock=false})
+
+	},
+	DisLikeDriver:btn=>{
+		user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
+		if(driverLiker.lock){
+			return !1
+		}
+		driverLiker.lock=true
+		API.dislike(user).then(driverLiker.rDriversLike).then(()=>{driverLiker.lock=false})
+	},
+	rDriversLike:data=>{
+		d.querySelectorAll(".driveraction").forEach((el)=>{
+			el.querySelector(".likeDriverBtn i").classList.remove()
+			el.querySelector(".likeDriverBtn i").classList.add()
+
+			el.querySelector(".dislikeDriverBtn i").classList.remove()
+			el.querySelector(".dislikeDriverBtn i").classList.add()
+		})
+	}
+}
+
+
 let rPagehome = () => {
   data = fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv")
   temp = fetch("/pages/home.html").then((r) => {
@@ -194,6 +226,8 @@ let rPagedrivers = () => {
     finalOutput = values[1].firstElementChild.outerHTML
     for (driver of values[0]) {
       //console.log(driver)
+      values[1].querySelector(".likeDriverBtn").setAttribute("onclick","driverLiker.LikeDriver(this)")
+      values[1].querySelector(".dislikeDriverBtn").setAttribute("onclick","driverLiker.DisLikeDriver(this)")
       finalOutput += values[1].lastElementChild.outerHTML.formatUnicorn(driver)
     }
 
@@ -227,7 +261,7 @@ const rPageRdetails=data=>{
 			data.forEach(el=>{
 				if (el.driveru == id[0] &&
 					el.date == id[1][0]+id[1][1]+"."+id[1][2]+id[1][3]+"."+id[1][4]+id[1][5]+id[1][6]+id[1][7] &&
-					id.length == id.concat(el.route.split(";")).filter((i,p,a)=>{return a.indexOf(i)==p}).length)
+					id.length == new Set([...id,...el.route.split(";")]).size)
 				{
 					finded=!0
 					return rPageRdetails_render(el,true)

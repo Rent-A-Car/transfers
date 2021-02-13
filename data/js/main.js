@@ -150,7 +150,7 @@ const API = (()=>{
 	let apiurl = "https://script.google.com/macros/s/AKfycbz6fGzgSxLaCwhjcvvxFTcWRJHV5jKXyFvS0KljbUbjtW9CGKjY6-j8/exec",
 	getToken = ()=>{return new Promise((s,e)=>{firebase.auth().currentUser.getIdToken().then(s,e)})},
 	get =(params)=>{
-		console.log(params,"get")
+		
 	},
 	post = (params)=>{
 		return getToken()
