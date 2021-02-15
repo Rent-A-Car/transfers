@@ -125,13 +125,22 @@ let driverLiker = {
 		API.dislike(user).then(driverLiker.rDriversLike).then(()=>{driverLiker.lock=false})
 	},
 	rDriversLike:data=>{
+		console.log(data)
+		
+		if(typeof data != "object") return
 		d.querySelectorAll(".driveraction").forEach((el)=>{
-			el.querySelector(".likeDriverBtn i").classList.remove()
-			el.querySelector(".likeDriverBtn i").classList.add()
+			user = el.parentElement.querySelector(".uname").innerText.substr(1)
+			if (data.l.includes(user)){
+				el.querySelector(".likeDriverBtn i").classList.add("icon-like-fill")
+				el.querySelector(".dislikeDriverBtn i").classList.remove("icon-dislike-fill")
 
-			el.querySelector(".dislikeDriverBtn i").classList.remove()
-			el.querySelector(".dislikeDriverBtn i").classList.add()
+			}else if(data.d.includes(user)){
+				el.querySelector(".dislikeDriverBtn i").classList.add("icon-dislike-fill")
+				el.querySelector(".likeDriverBtn i").classList.remove("icon-like-fill")
+			}
+			
 		})
+		localStorage.setItem("likes",JSON.stringify(data))
 	}
 }
 
@@ -233,6 +242,10 @@ let rPagedrivers = () => {
 
     stopLoading()
     setdata2page(finalOutput)
+    driverLiker.rDriversLike( (localStorage.hasOwnProperty("likes"))
+    ? JSON.parse(localStorage.getItem("likes"))
+    : {d:[],l:[]}
+    )
   })
 
 }

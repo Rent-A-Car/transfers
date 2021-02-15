@@ -10,7 +10,6 @@ window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
             .then(registration => {
             	registration.onupdatefound = (e)=>{
-debugger
             		window.location.reload()
             	}
                 console.log('Service worker successfully registered');
@@ -164,7 +163,25 @@ const API = (()=>{
 					body:token
 				});
 				console.log(req)
-				return fetch(req).then((r)=>{return r.json()}).then((r)=>{return r})
+				return fetch(req).then((r)=>{
+					debugger;
+					if(r.status == 408){
+						throw("408")
+					}
+					return r
+				}).then((r)=>{
+					return r.json()
+				}).then((r)=>{
+					return r["likes"]
+				}).then((r)=>{
+					return JSON.parse(r)
+				}).catch((r)=>{
+					console.log(r)
+					if(r=="408"){
+						ShowToastMessage("Плохое интернет соединение, попробуйте похоже","danger")
+					}
+					return false
+				})
 		})
 		//return fetch(apiurl,{method:"post",body:}).then((r)=>{return r.json()}).then((r)=>{return r})
 	},
