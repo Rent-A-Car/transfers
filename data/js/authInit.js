@@ -46,10 +46,12 @@ firebase.auth()
   	if (result.additionalUserInfo.isNewUser){
   		API.signUp(result.credential.accessToken).then((a)=>{
   			console.log("signup",a)
+			loginModal.hide()
 		})
   	}else{
   		API.loginIn(result.credential.accessToken).then((a)=>{
   			console.log("loginIn",a)
+			loginModal.hide()
 		})
   	}
   	
@@ -98,7 +100,7 @@ firebase.auth().signOut().then(() => {
 let loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {keyboard:false,backdrop:"static"})
 firebase.auth().onAuthStateChanged(function(user) {
 	console.log("onAuthStateChanged")
-	debugger
+	debugger;
   if (user && window.localStorage.getItem("auth")) {
     loginModal.hide()
     firebase.auth().currentUser = user;
