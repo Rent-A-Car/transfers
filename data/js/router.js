@@ -24,8 +24,14 @@ function startLoading (nodel) {
   (nodel) ? 0: setdata2page("")
   d.getElementById("pagedataloading").classList.remove("d-none")
 }
-function setdata2page (html) {
-  d.getElementById("page-container").innerHTML = html;
+function setdata2page (html,fullpage) {
+  pCont = d.getElementById("page-container")
+  if(fullpage){
+    pCont.classList="container-fluid mb-5 mt-0 px-0"
+  }else{
+    pCont.classList="container-fluid pb-5 mb-5 mt-3"
+  }
+  pCont.innerHTML = html;
 }
 
 function searchInRoute(text) {
@@ -41,7 +47,7 @@ function searchInRoute(text) {
 //   Render  functions
 
 
-const fetchCSV = (url) => {
+const fetchCSV =url => {
   return new Promise((resolve, reject) => {
     fetch(url)
     .then((r) => {
@@ -56,6 +62,14 @@ const fetchCSV = (url) => {
       reject(e)
     })
   });
+}
+
+const fetchTempl=url=>{
+  return  fetch(url).then((r) => {
+    return r.text()
+  }).then((r) => {
+    return new DOMParser().parseFromString(r, "text/html").querySelector("[template]")
+  })
 }
 
 let Oroutedetails = (x, i) => {
@@ -164,11 +178,7 @@ let driverLiker = {
 
 let rPagehome = () => {
   data = fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv")
-  temp = fetch("/pages/home.html").then((r) => {
-    return r.text()
-  }).then((r) => {
-    return new DOMParser().parseFromString(r, "text/html").querySelector("[template]")
-  })
+  temp = fetchTempl("/pages/home.html")
   let routs = {}
   finalOutput = ""
   Promise.all([data, temp]).then((values) => {
@@ -241,11 +251,7 @@ let rPagehome = () => {
 
 let rPagedrivers = () => {
   data = fetchCSV(DBURL + "?gid=0&single=true&output=csv&range=B:F")
-  temp = fetch("/pages/drivers.html").then((r) => {
-    return r.text()
-  }).then((r) => {
-    return new DOMParser().parseFromString(r, "text/html").querySelector("[template]")
-  })
+  temp = fetchTempl("/pages/drivers.html")
   let finalOutput = ""
   Promise.all([data, temp]).then((values) => {
     //let t = values[1].cloneNode(!0)
@@ -338,19 +344,30 @@ const rDriverdetails = data=>{
     fromLink=!0
   }
 
-  fetchCSV(DBURL + "?gid=0&single=true&output=csv&range=B:G").then(data=>{
-    console.log("driverdetails",data)
+  let Sdata = fetchCSV(DBURL + "?gid=0&single=true&output=csv&range=B:G")
+  let temp = fetchTempl("/pages/driver-info.html")
+  Promise.all([Sdata, temp]).then((values) => {
+    let Ddata; 
+    values[0].some(TDdata=>{
+      if(TDdata.username == uname){
+        Ddata = TDdata
+        return !0;
+      }else{
+        return !1
+      }
+    })
+    if(!Ddata){
+      return go2Page("drivers","drivers")
+    }
 
+    setTitle(Ddata.name)
 
+    stopLoading()
+    setdata2page(values[1].innerHTML.formatUnicorn(Ddata),!0)
   })
   
 }
 
-function rDriverdetails_render(data,fromLink=false){
-
-
-
-}
 
 
 
