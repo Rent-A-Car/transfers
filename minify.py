@@ -56,6 +56,7 @@ for pA in jsFiles:
             with open('docs/'+'.'.join(str(pA)[5:].split('.')),'w') as ff:
                 jsansw = requests.post(jsurl, data=jsdata).text
                 if re.match(minerreg,jsansw):
+                    print(pA)
                     print(jsansw)
                     exit(1)
                 ff.write(jsansw)

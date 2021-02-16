@@ -331,7 +331,7 @@ const rDriverdetails = data=>{
   console.log(data)
   let uname,
   fromLink=!1;
-  if(data.data?.uname){
+  if(data.data && data.data.uname){
 		uname = data.data.uname
 	}else{
     uname = new URL(location.href).searchParams.get("uname")
