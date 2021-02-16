@@ -139,7 +139,7 @@ async function checkCache(req) {
 		return StaticCachedResponse || checkOnline((nreq)?nreq:req);
 
 	}else{
-		return await Promise.race([timeout(4600), fetch(req)]);
+		return await Promise.race([timeout(6000), fetch(req)]);
 	}
 }
 function timeout(delay) {

@@ -2,6 +2,7 @@ let CONETCSTATE = 1;
 /*
 sw
 */
+
 d = document;
 window.addEventListener('load', () => {
 
@@ -107,7 +108,6 @@ d.getElementById("searchclsbutton").addEventListener('click',()=>{
 })
 
 function openSidebarNav() {
-d=document;
   d.getElementById("sidenav").style.width = "80%";
   //d.getElementById("main-page").style.marginLeft = "15rem";
   //d.getElementById("navPages").style.marginLeft = "15rem";
@@ -117,7 +117,6 @@ d=document;
 }
 
 function closeSidebarNav() {
-d=document;
   d.getElementById("sidenav").style.width = "0";
   //d.getElementById("main-page").style.marginLeft= "0";
   //d.getElementById("navPages").style.marginLeft = "0";
@@ -164,9 +163,10 @@ const API = (()=>{
 				});
 				console.log(req)
 				return fetch(req).then((r)=>{
-					debugger;
+					console.log(r)
 					if(r.status == 408){
 						throw("408")
+
 					}
 					return r
 				}).then((r)=>{
@@ -177,9 +177,7 @@ const API = (()=>{
 					return JSON.parse(r)
 				}).catch((r)=>{
 					console.log(r)
-					if(r=="408"){
-						ShowToastMessage("Плохое интернет соединение, попробуйте похоже","danger")
-					}
+					ShowToastMessage("Плохое интернет соединение, попробуйте похоже","danger")
 					return false
 				})
 		})

@@ -43,13 +43,16 @@ function searchInRoute(text) {
 
 const fetchCSV = (url) => {
   return new Promise((resolve, reject) => {
-    fetch(url).then((r) => {
+    fetch(url)
+    .then((r) => {
       return r.text()
-    }).then((r) => {
+    })
+    .then((r) => {
       resolve(CSV.csvToObject(r, {
         trim: !0
       }))
-    }).catch((e) => {
+    })
+    .catch((e) => {
       reject(e)
     })
   });
@@ -63,7 +66,8 @@ let Oroutedetails = (x, i) => {
       nav: "h"
     }
   })
-  fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv").then((data) => {
+  fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv")
+  .then((data) => {
     let routs = {}
     for (var ii = 0; ii < data.length; ii++) {
       if (data[ii].route in routs) {
@@ -110,24 +114,34 @@ let driverLiker = {
 	LikeDriver: btn=>{
 		user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
 		if(driverLiker.lock){
+      ShowToastMessage("Подождите","warning")
 			return !1
 		}
 		driverLiker.lock=true
-		API.like(user).then(driverLiker.rDriversLike).then(()=>{driverLiker.lock=false})
+		API.like(user).then(driverLiker.rDriversLike).then(()=>{
+      driverLiker.lock=false;
+      //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
+    })
 
 	},
 	DisLikeDriver:btn=>{
 		user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
 		if(driverLiker.lock){
+      ShowToastMessage("Подождите","warning")
 			return !1
 		}
 		driverLiker.lock=true
-		API.dislike(user).then(driverLiker.rDriversLike).then(()=>{driverLiker.lock=false})
+		API.dislike(user).then(driverLiker.rDriversLike).then(()=>{
+      driverLiker.lock=false
+      //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
+    })
+
 	},
 	rDriversLike:data=>{
-		console.log(data)
+		console.log("rDriversLike",data)
 		
 		if(typeof data != "object") return
+    
 		d.querySelectorAll(".driveraction").forEach((el)=>{
 			user = el.parentElement.querySelector(".uname").innerText.substr(1)
 			if (data.l.includes(user)){
@@ -137,7 +151,10 @@ let driverLiker = {
 			}else if(data.d.includes(user)){
 				el.querySelector(".dislikeDriverBtn i").classList.add("icon-dislike-fill")
 				el.querySelector(".likeDriverBtn i").classList.remove("icon-like-fill")
-			}
+			}else{
+        el.querySelector(".dislikeDriverBtn i").classList.remove("icon-dislike-fill")
+        el.querySelector(".likeDriverBtn i").classList.remove("icon-like-fill")
+      }
 			
 		})
 		localStorage.setItem("likes",JSON.stringify(data))
@@ -257,8 +274,7 @@ const rPageRdetails=data=>{
 	}else{
 		fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv").then(data=>{
 			
-			myUrl = new URL(location.href)
-			let id = myUrl.searchParams.get("id")
+			let id = new URL(location.href).searchParams.get("id")
 			if(!id){
 				go2Page("home","home")
 				return
@@ -300,6 +316,43 @@ function rPageRdetails_render(Rdata,fromLink=false){
 	])
 
 }
+const OrDriverdetails=uname=>go2Page("driverdetails",{
+control: {title: "",
+    top: "bnm",
+    nav: "h",
+    menu: []
+  },
+  data:{
+    uname
+  }
+})
+
+const rDriverdetails = data=>{
+  console.log(data)
+  let uname,
+  fromLink=!1;
+  if(data.data?.uname){
+		uname = data.data.uname
+	}else{
+    uname = new URL(location.href).searchParams.get("uname")
+    fromLink=!0
+  }
+
+  fetchCSV(DBURL + "?gid=0&single=true&output=csv&range=B:G").then(data=>{
+    console.log("driverdetails",data)
+
+
+  })
+  
+}
+
+function rDriverdetails_render(data,fromLink=false){
+
+
+
+}
+
+
 
 
 //end of render functions
@@ -334,6 +387,19 @@ const PAGEDATA = {
 
     }
   },
+  driverdetails: {
+    control: {
+      title: "",
+      top: "bnm",
+      nav: "h",
+      menu: []
+    },
+    back: {
+      page: "drivers",
+      data: "drivers"
+
+    }
+  },
   "add-driver": {
     control: {
       title: "Добавить перевозчика",
@@ -363,7 +429,7 @@ const PAGERENDER = {
   drivers: rPagedrivers,
   calendar: console.log,
   routedetails: rPageRdetails,
-  driverdetails: console.log,
+  driverdetails: rDriverdetails,
   "add-driver": console.log
 
 }
