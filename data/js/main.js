@@ -130,7 +130,22 @@ function ShowToastMessage(message="",type="primary",delay=1300){
 		let tm = d.createElement("div")
 		tm.style="bottom:12%;left:50%;transform:translateX(-50%);z-index:2;position:fixed"
 
-		tm.innerHTML='<div class="alert alert-'+type+'" role=alert style="padding:.4em 1em;border-radius:30px">'+message+'</div>'
+		switch (type) {
+			case "primary":
+				type = "alert-primary"
+				break;
+			case "warning":
+				type = "alert-warning"
+				break;
+			case "danger":
+				type = "alert-danger"
+				break;
+			default:
+				type = "alert-"+type
+
+		}
+
+		tm.innerHTML='<div class="alert '+type+'" role=alert style="padding:.4em 1em;border-radius:30px">'+message+'</div>'
 		d.body.append(tm)
 		tm.style.animation = "backInUp 1s both"
 		setTimeout(()=>{
