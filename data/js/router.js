@@ -126,32 +126,40 @@ let shareRoute = (id, btn) => {
 let driverLiker = {
   lock: false,
   LikeDriver: btn => {
-    user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
-    if (driverLiker.lock) {
-      ShowToastMessage("Подождите", "warning")
-      return !1
-    }
-    driverLiker.lock = true
-    startLoading(!0)
-    API.like(user).then(driverLiker.rDriversLike).then(() => {
-      driverLiker.lock = false;
-      stopLoading()
-      //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
+    return new Promise((resolve, reject) => {
+      user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
+      if (driverLiker.lock) {
+        ShowToastMessage("Подождите", "warning")
+        reject(!1)
+      }
+      driverLiker.lock = true
+      startLoading(!0)
+      API.like(user).then(driverLiker.rDriversLike).then(() => {
+        driverLiker.lock = false;
+        stopLoading()
+        resolve(!0)
+        //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
+      })
     })
+
 
   },
   DisLikeDriver: btn => {
-    user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
-    if (driverLiker.lock) {
-      ShowToastMessage("Подождите", "warning")
-      return !1
-    }
-    driverLiker.lock = true
-    startLoading(!0)
-    API.dislike(user).then(driverLiker.rDriversLike).then(() => {
-      driverLiker.lock = false
-      stopLoading()
-      //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
+    return new Promise((resolve, reject) => {
+      user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
+      if (driverLiker.lock) {
+        ShowToastMessage("Подождите", "warning")
+        reject(!1)
+      }
+      driverLiker.lock = true
+      startLoading(!0)
+      API.dislike(user).then(driverLiker.rDriversLike).then(() => {
+        driverLiker.lock = false
+        stopLoading()
+        resolve(!0)
+        //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
+      })
+
     })
 
   },
