@@ -363,3 +363,16 @@ opacity:0;transform:translate3d(-50%,100%,0)
 .driveraction > div > i:hover{
   background-color: rgba(0, 0, 0, 0.04);
 }
+
+.driveruser-box{
+  width: 5em;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.driveruser-box img {
+  width: 100%;
+  border-radius: 50%;
+  padding: 3px;
+  background: #fff;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
