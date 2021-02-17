@@ -132,8 +132,10 @@ let driverLiker = {
 			return !1
 		}
 		driverLiker.lock=true
+    startLoading(!0)
 		API.like(user).then(driverLiker.rDriversLike).then(()=>{
       driverLiker.lock=false;
+      stopLoading()
       //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
     })
 
@@ -145,8 +147,10 @@ let driverLiker = {
 			return !1
 		}
 		driverLiker.lock=true
+    startLoading(!0)
 		API.dislike(user).then(driverLiker.rDriversLike).then(()=>{
       driverLiker.lock=false
+      stopLoading()
       //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
     })
 

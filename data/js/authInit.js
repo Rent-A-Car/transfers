@@ -100,7 +100,6 @@ firebase.auth().signOut().then(() => {
 let loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {keyboard:false,backdrop:"static"})
 firebase.auth().onAuthStateChanged(function(user) {
 	console.log("onAuthStateChanged")
-	debugger;
   if (user && window.localStorage.getItem("auth")) {
     loginModal.hide()
     firebase.auth().currentUser = user;
