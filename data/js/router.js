@@ -1,5 +1,5 @@
 String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
-  function() {
+  function () {
     "use strict";
     var str = this.toString();
     if (arguments.length) {
@@ -20,16 +20,16 @@ const DBURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vROKYurp41BsWy1wI
 function stopLoading() {
   d.getElementById("pagedataloading").classList.add("d-none")
 }
-function startLoading (nodel) {
-  (nodel) ? 0: setdata2page("")
+function startLoading(nodel) {
+  (nodel) ? 0 : setdata2page("")
   d.getElementById("pagedataloading").classList.remove("d-none")
 }
-function setdata2page (html,fullpage) {
+function setdata2page(html, fullpage) {
   pCont = d.getElementById("page-container")
-  if(fullpage){
-    pCont.classList="container-fluid mb-5 mt-0 px-0"
-  }else{
-    pCont.classList="container-fluid pb-5 mb-5 mt-3"
+  if (fullpage) {
+    pCont.classList = "container-fluid mb-5 mt-0 px-0"
+  } else {
+    pCont.classList = "container-fluid pb-5 mb-5 mt-3"
   }
   pCont.innerHTML = html;
 }
@@ -47,25 +47,25 @@ function searchInRoute(text) {
 //   Render  functions
 
 
-const fetchCSV =url => {
+const fetchCSV = url => {
   return new Promise((resolve, reject) => {
     fetch(url)
-    .then((r) => {
-      return r.text()
-    })
-    .then((r) => {
-      resolve(CSV.csvToObject(r, {
-        trim: !0
-      }))
-    })
-    .catch((e) => {
-      reject(e)
-    })
+      .then((r) => {
+        return r.text()
+      })
+      .then((r) => {
+        resolve(CSV.csvToObject(r, {
+          trim: !0
+        }))
+      })
+      .catch((e) => {
+        reject(e)
+      })
   });
 }
 
-const fetchTempl=url=>{
-  return  fetch(url).then((r) => {
+const fetchTempl = url => {
+  return fetch(url).then((r) => {
     return r.text()
   }).then((r) => {
     return new DOMParser().parseFromString(r, "text/html").querySelector("[template]")
@@ -81,40 +81,40 @@ let Oroutedetails = (x, i) => {
     }
   })
   fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv")
-  .then((data) => {
-    let routs = {}
-    for (var ii = 0; ii < data.length; ii++) {
-      if (data[ii].route in routs) {
-        routs[data[ii].route].push(data[ii])
-      } else {
-        routs[data[ii].route] = []
-        routs[data[ii].route].push(data[ii])
+    .then((data) => {
+      let routs = {}
+      for (var ii = 0; ii < data.length; ii++) {
+        if (data[ii].route in routs) {
+          routs[data[ii].route].push(data[ii])
+        } else {
+          routs[data[ii].route] = []
+          routs[data[ii].route].push(data[ii])
+        }
       }
-    }
-    go2Page("routedetails", {
-      control: {
-        title: routs[x][i].drivern + " (" + routs[x][i].date + ")",
-        top: "bnm",
-        nav: "h",
-        menu:[]
-      },
-      data: routs[x][i]
-    })
+      go2Page("routedetails", {
+        control: {
+          title: routs[x][i].drivern + " (" + routs[x][i].date + ")",
+          top: "bnm",
+          nav: "h",
+          menu: []
+        },
+        data: routs[x][i]
+      })
 
-  })
+    })
 }
 
 let shareRoute = (id, btn) => {
-	[name,date] = Array.from(btn.parentElement.parentElement.firstElementChild.firstElementChild.children).map(e=>{return e.innerText})
+  [name, date] = Array.from(btn.parentElement.parentElement.firstElementChild.firstElementChild.children).map(e => { return e.innerText })
   if (navigator.share) {
     navigator.share({
-      title:name+" ("+date+")",
+      title: name + " (" + date + ")",
       url: "https://transfers.arendacg.space/?p=routedetails&id=" + id
     });
   } else {
     //to copy
-    alert("Ссылка скопирована в буфер обмена")?0
-    :navigator.clipboard.writeText(name+" ("+date+") https://transfers.arendacg.space/?p=routedetails&id="+id)
+    alert("Ссылка скопирована в буфер обмена") ? 0
+      : navigator.clipboard.writeText(name + " (" + date + ") https://transfers.arendacg.space/?p=routedetails&id=" + id)
   }
   btn.parentElement.parentElement.scrollBy({
     left: -1,
@@ -124,59 +124,59 @@ let shareRoute = (id, btn) => {
 
 
 let driverLiker = {
-	lock:false,
-	LikeDriver: btn=>{
-		user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
-		if(driverLiker.lock){
-      ShowToastMessage("Подождите","warning")
-			return !1
-		}
-		driverLiker.lock=true
+  lock: false,
+  LikeDriver: btn => {
+    user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
+    if (driverLiker.lock) {
+      ShowToastMessage("Подождите", "warning")
+      return !1
+    }
+    driverLiker.lock = true
     startLoading(!0)
-		API.like(user).then(driverLiker.rDriversLike).then(()=>{
-      driverLiker.lock=false;
+    API.like(user).then(driverLiker.rDriversLike).then(() => {
+      driverLiker.lock = false;
       stopLoading()
       //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
     })
 
-	},
-	DisLikeDriver:btn=>{
-		user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
-		if(driverLiker.lock){
-      ShowToastMessage("Подождите","warning")
-			return !1
-		}
-		driverLiker.lock=true
+  },
+  DisLikeDriver: btn => {
+    user = btn.parentElement.parentElement.querySelector(".uname").innerText.substr(1)
+    if (driverLiker.lock) {
+      ShowToastMessage("Подождите", "warning")
+      return !1
+    }
+    driverLiker.lock = true
     startLoading(!0)
-		API.dislike(user).then(driverLiker.rDriversLike).then(()=>{
-      driverLiker.lock=false
+    API.dislike(user).then(driverLiker.rDriversLike).then(() => {
+      driverLiker.lock = false
       stopLoading()
       //btn.querySelector("span").innerText = (+btn.querySelector("span").innerText)+1
     })
 
-	},
-	rDriversLike:data=>{
-		console.log("rDriversLike",data)
-		
-		if(typeof data != "object") return
-    
-		d.querySelectorAll(".driveraction").forEach((el)=>{
-			user = el.parentElement.querySelector(".uname").innerText.substr(1)
-			if (data.l.includes(user)){
-				el.querySelector(".likeDriverBtn i").classList.add("icon-like-fill")
-				el.querySelector(".dislikeDriverBtn i").classList.remove("icon-dislike-fill")
+  },
+  rDriversLike: data => {
+    console.log("rDriversLike", data)
 
-			}else if(data.d.includes(user)){
-				el.querySelector(".dislikeDriverBtn i").classList.add("icon-dislike-fill")
-				el.querySelector(".likeDriverBtn i").classList.remove("icon-like-fill")
-			}else{
+    if (typeof data != "object") return
+
+    d.querySelectorAll(".driveraction").forEach((el) => {
+      user = el.parentElement.querySelector(".uname").innerText.substr(1)
+      if (data.l.includes(user)) {
+        el.querySelector(".likeDriverBtn i").classList.add("icon-like-fill")
+        el.querySelector(".dislikeDriverBtn i").classList.remove("icon-dislike-fill")
+
+      } else if (data.d.includes(user)) {
+        el.querySelector(".dislikeDriverBtn i").classList.add("icon-dislike-fill")
+        el.querySelector(".likeDriverBtn i").classList.remove("icon-like-fill")
+      } else {
         el.querySelector(".dislikeDriverBtn i").classList.remove("icon-dislike-fill")
         el.querySelector(".likeDriverBtn i").classList.remove("icon-like-fill")
       }
-			
-		})
-		localStorage.setItem("likes",JSON.stringify(data))
-	}
+
+    })
+    localStorage.setItem("likes", JSON.stringify(data))
+  }
 }
 
 
@@ -262,114 +262,114 @@ let rPagedrivers = () => {
     finalOutput = values[1].firstElementChild.outerHTML
     for (driver of values[0]) {
       //console.log(driver)
-      values[1].querySelector(".likeDriverBtn").setAttribute("onclick","driverLiker.LikeDriver(this)")
-      values[1].querySelector(".dislikeDriverBtn").setAttribute("onclick","driverLiker.DisLikeDriver(this)")
+      values[1].querySelector(".likeDriverBtn").setAttribute("onclick", "driverLiker.LikeDriver(this)")
+      values[1].querySelector(".dislikeDriverBtn").setAttribute("onclick", "driverLiker.DisLikeDriver(this)")
       finalOutput += values[1].lastElementChild.outerHTML.formatUnicorn(driver)
     }
 
     stopLoading()
     setdata2page(finalOutput)
-    driverLiker.rDriversLike( (localStorage.hasOwnProperty("likes"))
-    ? JSON.parse(localStorage.getItem("likes"))
-    : {d:[],l:[]}
+    driverLiker.rDriversLike((localStorage.hasOwnProperty("likes"))
+      ? JSON.parse(localStorage.getItem("likes"))
+      : { d: [], l: [] }
     )
   })
 
 }
 
 
-const rPageRdetails=data=>{
-	if(data.data){
-		rPageRdetails_render(data.data)
-	}else{
-		fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv").then(data=>{
-			
-			let id = new URL(location.href).searchParams.get("id")
-			if(!id){
-				go2Page("home","home")
-				return
-			}
-			id=id.split("-")
-			//myUrl.searchParams.delete("id")
-    		//window.history.replaceState(null, null, myUrl);
-			if (id.length < 4) {
-				return go2Page("home","home")
-			} 
+const rPageRdetails = data => {
+  if (data.data) {
+    rPageRdetails_render(data.data)
+  } else {
+    fetchCSV(DBURL + "?gid=1463143925&single=true&output=csv").then(data => {
 
-			finded=!1;
-			data.forEach(el=>{
-				if (el.driveru == id[0] &&
-					el.date == id[1][0]+id[1][1]+"."+id[1][2]+id[1][3]+"."+id[1][4]+id[1][5]+id[1][6]+id[1][7] &&
-					id.length == new Set([...id,...el.route.split(";")]).size)
-				{
-					finded=!0
-					return rPageRdetails_render(el,true)
-				}
+      let id = new URL(location.href).searchParams.get("id")
+      if (!id) {
+        go2Page("home", "home")
+        return
+      }
+      id = id.split("-")
+      //myUrl.searchParams.delete("id")
+      //window.history.replaceState(null, null, myUrl);
+      if (id.length < 4) {
+        return go2Page("home", "home")
+      }
 
-			})
-			
-			return (!finded)?go2Page("home","home"):0
-		})
-	}
+      finded = !1;
+      data.forEach(el => {
+        if (el.driveru == id[0] &&
+          el.date == id[1][0] + id[1][1] + "." + id[1][2] + id[1][3] + "." + id[1][4] + id[1][5] + id[1][6] + id[1][7] &&
+          id.length == new Set([...id, ...el.route.split(";")]).size) {
+          finded = !0
+          return rPageRdetails_render(el, true)
+        }
+
+      })
+
+      return (!finded) ? go2Page("home", "home") : 0
+    })
+  }
 }
 
-function rPageRdetails_render(Rdata,fromLink=false){
-	if(fromLink){
-		setTitle(Rdata.drivern +"("+Rdata.date+")")
-	}
-	//debugger
-	setMenuItems([
-		{
-			a:"ShowToastMessage('Тестова провірка алертів')",
-			t:"Call"
-		}
-	])
+function rPageRdetails_render(Rdata, fromLink = false) {
+  if (fromLink) {
+    setTitle(Rdata.drivern + "(" + Rdata.date + ")")
+  }
+  //debugger
+  setMenuItems([
+    {
+      a: "ShowToastMessage('Тестова провірка алертів')",
+      t: "Call"
+    }
+  ])
 
 }
-const OrDriverdetails=uname=>go2Page("driverdetails",{
-control: {title: "",
+const OrDriverdetails = uname => go2Page("driverdetails", {
+  control: {
+    title: "",
     top: "bnm",
     nav: "h",
     menu: []
   },
-  data:{
+  data: {
     uname
   }
 })
 
-const rDriverdetails = data=>{
+const rDriverdetails = data => {
   console.log(data)
   let uname,
-  fromLink=!1;
-  if(data.data && data.data.uname){
-		uname = data.data.uname
-	}else{
+    fromLink = !1;
+  if (data.data && data.data.uname) {
+    uname = data.data.uname
+  } else {
     uname = new URL(location.href).searchParams.get("uname")
-    fromLink=!0
+    fromLink = !0
   }
 
   let Sdata = fetchCSV(DBURL + "?gid=0&single=true&output=csv&range=B:G")
   let temp = fetchTempl("/pages/driver-info.html")
   Promise.all([Sdata, temp]).then((values) => {
-    let Ddata; 
-    values[0].some(TDdata=>{
-      if(TDdata.username == uname){
+    let Ddata;
+    values[0].some(TDdata => {
+      if (TDdata.username == uname) {
         Ddata = TDdata
         return !0;
-      }else{
+      } else {
         return !1
       }
     })
-    if(!Ddata){
-      return go2Page("drivers","drivers")
+    if (!Ddata) {
+      return go2Page("drivers", "drivers")
     }
 
     setTitle(Ddata.name)
 
     stopLoading()
-    setdata2page(values[1].innerHTML.formatUnicorn(Ddata),!0)
+    setdata2page(values[1].innerHTML.formatUnicorn(Ddata), !0)
   })
-  
+
 }
 
 
@@ -505,38 +505,38 @@ const curPage = () => {
 /*
 
 data = {
-	control:{
-		title:"Home"
-		top:["menuopenbutton","backnavbutton","searchnavbutton","reloadnavbutton","offlinnavbutton","mmenunavbutton"],
-			"msm" - menuopenbutton searchnavbutton mmenunavbutton
-			"msn" - menuopenbutton searchnavbutton
-			"mnm" - menuopenbutton mmenunavbutton
-			"mnn" - menuopenbutton
-			"bsm" - backnavbutton searchnavbutton mmenunavbutton
-			"bnm" - backnavbutton mmenunavbutton
-			"bsn" - backnavbutton searchnavbutton
-			"bnn" - backnavbutton
-		nav:"s" || "h",
-		navTab:""
-		menu:[ {t:"title",a:mufunc} ]
-	}
-	back:{
-		data:{}
-		page:"home"
-	}
+  control:{
+    title:"Home"
+    top:["menuopenbutton","backnavbutton","searchnavbutton","reloadnavbutton","offlinnavbutton","mmenunavbutton"],
+      "msm" - menuopenbutton searchnavbutton mmenunavbutton
+      "msn" - menuopenbutton searchnavbutton
+      "mnm" - menuopenbutton mmenunavbutton
+      "mnn" - menuopenbutton
+      "bsm" - backnavbutton searchnavbutton mmenunavbutton
+      "bnm" - backnavbutton mmenunavbutton
+      "bsn" - backnavbutton searchnavbutton
+      "bnn" - backnavbutton
+    nav:"s" || "h",
+    navTab:""
+    menu:[ {t:"title",a:mufunc} ]
+  }
+  back:{
+    data:{}
+    page:"home"
+  }
 }
 */
-function setTitle(title){
-	 d.getElementById("pageName").innerText = title
+function setTitle(title) {
+  d.getElementById("pageName").innerText = title
 }
 
-function setMenuItems(items=[]){
+function setMenuItems(items = []) {
 
   m = d.getElementById('mmenunavbutton');
   m.classList.remove("d-none");
   li = ""
   for (var i = 0; i < items.length; i++) {
-    li += "<li><a class=dropdown-item role=button onclick=\"" + ((items[i].a.match(/\(.*\)/))?items[i].a:items[i].a+"(this)") + "\" tabindex=0>" + items[i].t + "</a></li>"
+    li += "<li><a class=dropdown-item role=button onclick=\"" + ((items[i].a.match(/\(.*\)/)) ? items[i].a : items[i].a + "(this)") + "\" tabindex=0>" + items[i].t + "</a></li>"
   }
   m.parentNode.querySelector(".dropdown-menu").innerHTML = li
 
@@ -547,7 +547,7 @@ const go2Page = (page, data) => {
   console.log(page, data)
   startLoading()
   if (data) {
-    (typeof data == "string") ? data = PAGEDATA[data]: 0;
+    (typeof data == "string") ? data = PAGEDATA[data] : 0;
     if (data.control) {
       data.control.top.split("").forEach((cb, cn) => {
         switch (cn) {
@@ -581,8 +581,8 @@ const go2Page = (page, data) => {
             break;
           case 2:
             (cb == "m") ? (() => {
-            	setMenuItems(data.control.menu)
-              })() : (() => {
+              setMenuItems(data.control.menu)
+            })() : (() => {
               d.getElementById('mmenunavbutton').classList.add("d-none")
             })();
             break;
@@ -610,7 +610,7 @@ const go2Page = (page, data) => {
     sessionStorage.setItem('pdata', JSON.stringify(data))
     sessionStorage.setItem('page', page)
   }
-  
+
   if (data.back && page != "blank") {
     history.pushState([data.back.page, data.back.data], page, "#d" + page)
     history.pushState(null, page, "#f" + page)
