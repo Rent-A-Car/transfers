@@ -374,8 +374,18 @@ const rDriverdetails = data => {
 
     setTitle(Ddata.name)
 
+    let finalOutput = values[1],
+      contacts = "",
+      $contactsLink = finalOutput.querySelector(".contacts-link").firstElementChild.cloneNode(!0)
+    debugger
+    for (contactsD of JSON.parse(Ddata.contats).contacts) {
+      contacts += $contactsLink.outerHTML.formatUnicorn(contactsD)
+    }
+
+    finalOutput.querySelector(".contacts-link").innerHTML = contacts;
+
     stopLoading()
-    setdata2page(values[1].innerHTML.formatUnicorn(Ddata), !0)
+    setdata2page(finalOutput.innerHTML.formatUnicorn(Ddata), !0)
   })
 
 }

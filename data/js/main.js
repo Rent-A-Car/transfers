@@ -81,7 +81,7 @@ d.getElementById("menuopenbutton").addEventListener('click', openSidebarNav);
 d.getElementById("reloadnavbutton").addEventListener('click', () => {
 	startLoading();
 	page = sessionStorage.getItem('page')
-	data = sessionStorage.getItem('pdata')
+	data = JSON.parse(sessionStorage.getItem('pdata'))
 	if (page in PAGERENDER) {
 		f = PAGERENDER[page]
 		f(data)
